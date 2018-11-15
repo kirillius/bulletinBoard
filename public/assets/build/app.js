@@ -4,13 +4,13 @@ angular
         'ngAnimate',
         'ngResource',
         'ngSanitize',
-        'ngMaterial',
         'ngMessages',
+        'ui.bootstrap',
         'app.general',
-        'app.chat'
+        'app.main'
     ])
-    .config(['$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', 'AppPaths', '$mdThemingProvider', '$mdDateLocaleProvider',
-        function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, AppPaths, $mdThemingProvider, $mdDateLocaleProvider) {
+    .config(['$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', 'AppPaths',
+        function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, AppPaths) {
 
             $stateProvider
                 .state('app', {
@@ -20,68 +20,36 @@ angular
                     abstract: true
                 });
 
-            $mdThemingProvider.theme('default')
-                .primaryPalette('green', {
-                    'default': '800'
-                })
-                .accentPalette('green', {
-                    'default': '700' // use shade 200 for default, and keep all other shades the same
-                });
-
-            $mdDateLocaleProvider.formatDate = function(date) {
-                return moment(date).format('DD.MM.YYYY');
-            };
-
-            $mdDateLocaleProvider.firstDayOfWeek = 1;
             $urlRouterProvider.otherwise('/');
 
         }])
     .run(['$rootScope', function($rootScope){
     }]);
 angular
-    .module('app.chat', [
-        'ui.router',
-        'app.general'
+    .module('app.general', [
     ]);
 angular
-    .module('app.general', [
+    .module('app.main', [
+        'ui.router',
+        'app.general'
     ]);
 angular.module('app')
     .controller('AppController', ['$scope', '$rootScope', '$state', '$http', 'AppPaths', function($scope, $rootScope, $state, $http, AppPaths) {
         var self = this;
     }]);
-angular.module('app.chat')
-    .controller('ChatController', ['$scope', '$state', '$http', 'AppPaths', function($scope, $state, $http, AppPaths) {
-        $scope.users = [
-            {name: 'Юзер 1'},
-            {name: 'Юзер 2'},
-            {name: 'Юзер 3'},
-        ];
-
-        $scope.secretChats = [];
-
-        $scope.startChatUser = function(user) {
-            var userChat = {
-                name: 'Чат с '+user.name,
-                description: 'Общение с юзером под именем '+user.name,
-                userName: user.name
-            };
-
-            $scope.secretChats.push(userChat);
-        }
+angular.module('app.main')
+    .controller('MainController', ['$scope', '$state', '$http', 'AppPaths', function($scope, $state, $http, AppPaths) {
+        console.log("vhh1");
     }]);
-/**
- * Created by Lavrentev on 02.12.2016.
- */
 angular
-    .module('app.chat')
+    .module('app.main')
     .config(['$stateProvider', 'AppPaths', function($stateProvider, AppPaths) {
 
         $stateProvider
-            .state('app.chat', {
+            .state('app.main', {
                 url: '',
-                controller: 'ChatController',
-                templateUrl: AppPaths.chat + 'templates/index.html'
+                controller: 'MainController',
+                templateUrl: AppPaths.main + 'templates/index.html'
             });
     }]);
 var app_path = 'assets/angular/app/',
@@ -91,5 +59,5 @@ angular.module('app.general')
     .constant('AppPaths', {
         app:            app_path,
         modules:        modules_path,
-        chat:      modules_path + 'chat/'
+        main:      modules_path + 'main/'
     });

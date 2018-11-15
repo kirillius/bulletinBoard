@@ -5,5 +5,5 @@ angular.module('app.general')
     .constant('AppPaths', {
         app:            app_path,
         modules:        modules_path,
-        chat:      modules_path + 'chat/'
+        main:      modules_path + 'main/'
     });

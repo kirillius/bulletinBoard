@@ -4,13 +4,13 @@ angular
         'ngAnimate',
         'ngResource',
         'ngSanitize',
-        'ngMaterial',
         'ngMessages',
+        'ui.bootstrap',
         'app.general',
-        'app.chat'
+        'app.main'
     ])
-    .config(['$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', 'AppPaths', '$mdThemingProvider', '$mdDateLocaleProvider',
-        function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, AppPaths, $mdThemingProvider, $mdDateLocaleProvider) {
+    .config(['$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', 'AppPaths',
+        function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, AppPaths) {
 
             $stateProvider
                 .state('app', {
@@ -20,19 +20,6 @@ angular
                     abstract: true
                 });
 
-            $mdThemingProvider.theme('default')
-                .primaryPalette('green', {
-                    'default': '800'
-                })
-                .accentPalette('green', {
-                    'default': '700' // use shade 200 for default, and keep all other shades the same
-                });
-
-            $mdDateLocaleProvider.formatDate = function(date) {
-                return moment(date).format('DD.MM.YYYY');
-            };
-
-            $mdDateLocaleProvider.firstDayOfWeek = 1;
             $urlRouterProvider.otherwise('/');
 
         }])

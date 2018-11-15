@@ -6,13 +6,14 @@ var source = require('vinyl-source-stream');
 
 var angular_dir = 'public/assets/angular/';
 var build_dir = 'public/assets/build/';
+var fonts_dir = 'public/assets/fonts/';
 
 var paths = {
     vendor_styles: [
-        'node_modules/angular-material/angular-material.min.css',
+        'node_modules/bootstrap/dist/css/bootstrap.css',
     ],
     app_styles: [
-        'public/assets/css/chat.css'
+        'public/assets/css/style.css'
     ],
     app_styles_login: [
         'public/assets/css/login.css'
@@ -23,7 +24,11 @@ var paths = {
         angular_dir + 'app/**/*.module.js',
         angular_dir + 'app/app.module.js',
         angular_dir + 'app/**/*.js'
-    ]
+    ],
+
+    vendor_fonts: [
+        'node_modules/bootstrap/fonts/glyphicons-halflings-regular.*'
+    ],
 };
 
 //===================================================================================
@@ -43,6 +48,12 @@ gulp.task('vendorCSS', function() {
         .pipe(concat('vendor.css'))
         .pipe(gulp.dest(build_dir))
         .pipe(size({title: 'vendor.css'}));
+});
+
+// Fonts
+gulp.task('vendorFONTS', function() {
+    return gulp.src(paths.vendor_fonts)
+        .pipe(gulp.dest(fonts_dir));
 });
 
 //===================================================================================
@@ -77,10 +88,11 @@ gulp.task('appLoginCSS', function() {
 gulp.task('watch', function() {
     gulp.watch(paths.vendor_scripts, ['vendorJS']);
     gulp.watch(paths.vendor_styles, ['vendorCSS']);
+    gulp.watch(paths.vendor_styles, ['vendorFONTS']);
 
     gulp.watch(paths.app_scripts, ['appJS']);
     gulp.watch(paths.app_styles, ['appCSS']);
     gulp.watch(paths.app_styles, ['appLoginCSS']);
 });
 
-gulp.task('default', ['vendorJS', 'vendorCSS', 'appJS', 'appCSS', 'appLoginCSS', 'watch']);
+gulp.task('default', ['vendorJS', 'vendorCSS', 'vendorFONTS', 'appJS', 'appCSS', 'appLoginCSS', 'watch']);

@@ -1,9 +1,64 @@
-.my-toolbar {
-    height: 30px;
-    max-height: 300px;
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #f5f5f5;
 }
 
-.header {
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+    padding: 60px 15px 0;
+}
+
+.mainArea {
+    margin-top: 300px;
+}
+
+.mainUL {
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+.blockInMain {
+    border: 1px solid black;
+    padding-top: 20px;
+}
+
+.blockInMain:hover {
+    background: #00ff00; /* Цвет фона под ссылкой */
+    color: #fff; /* Цвет ссылки */
+}
+/*input { width: 500px !important; } */
+
+.btn-nav {
+    margin-top: 7px;
+}
+
+.container .text-muted {
+    margin: 20px 0;
+}
+
+#footer > .container {
+    padding-right: 15px;
     padding-left: 15px;
-    color: #fff;
+}
+
+code {
+    font-size: 80%;
 }
