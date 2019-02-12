@@ -6,8 +6,10 @@ angular
         'ngSanitize',
         'ngMessages',
         'ui.bootstrap',
+        'ui.select',
         'app.general',
-        'app.main'
+        'app.main',
+        'app.bulletin'
     ])
     .config(['$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', 'AppPaths',
         function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, AppPaths) {

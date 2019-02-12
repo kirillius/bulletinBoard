@@ -27,7 +27,7 @@ body > .container {
 }
 
 .mainArea {
-    margin-top: 300px;
+    margin-top: 50px;
 }
 
 .mainUL {
@@ -38,6 +38,13 @@ body > .container {
 .blockInMain {
     border: 1px solid black;
     padding-top: 20px;
+}
+
+.searchFormMain {
+    background-color: #f5f5f5;
+    padding-top: 50px;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
 }
 
 .blockInMain:hover {
@@ -61,4 +68,20 @@ body > .container {
 
 code {
     font-size: 80%;
+}
+
+.ui-select-placeholder, .ui-select-match-text, .ui-select-match-item {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 40px;
+}
+
+.customForm {
+    padding-top: 10px;
+    padding-left: 15px;
+}
+
+.customFormTop {
+    padding-top: 10px;
 }

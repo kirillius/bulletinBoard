@@ -21,18 +21,6 @@ module.exports = function (sequelize, options, callback) {
     ParametersObject.belongsTo(options.models.parameters, {as: 'parameter', foreignKey : 'parameterId'});
     ParametersObject.belongsTo(options.models.parametersValue, {as: 'parameterValue', foreignKey : 'parameterValueId'});
 
-    /*options.models.object.belongsToMany(options.models.parameters, {
-        as: 'objectForParameter',
-        through: ParametersObject,
-        foreignKey: 'objectId'
-    });
-
-    options.models.parameters.belongsToMany(options.models.object, {
-        as: 'parametersForObject',
-        through: ParametersObject,
-        foreignKey: 'parameterId'
-    });*/
-
     ParametersObject.sync(options).then(function () {
         console.log('Success table parametersObject');
         callback();

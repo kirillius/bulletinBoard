@@ -5,5 +5,6 @@ angular.module('app.general')
     .constant('AppPaths', {
         app:            app_path,
         modules:        modules_path,
-        main:      modules_path + 'main/'
+        main:      modules_path + 'main/',
+        bulletin:      modules_path + 'bulletin/'
     });

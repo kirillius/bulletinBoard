@@ -13,7 +13,7 @@ module.exports = function (sequelize, options, callback) {
         }
     );
 
-    options.models.parameters.hasMany(ParametersValue, {as: 'parameters', foreignKey : 'parameterId', onDelete: 'SET NULL'});
+    options.models.parameters.hasMany(ParametersValue, {as: 'values', foreignKey : 'parameterId', onDelete: 'SET NULL'});
     ParametersValue.belongsTo(options.models.parameters, {as: 'value', foreignKey : 'parameterId'});
 
     ParametersValue.sync(options).then(function () {

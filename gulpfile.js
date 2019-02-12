@@ -11,6 +11,7 @@ var fonts_dir = 'public/assets/fonts/';
 var paths = {
     vendor_styles: [
         'node_modules/bootstrap/dist/css/bootstrap.css',
+        'node_modules/ui-select/dist/select.css'
     ],
     app_styles: [
         'public/assets/css/style.css'

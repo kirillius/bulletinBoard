@@ -9,6 +9,9 @@ module.exports = function (sequelize, options, callback) {
             },
             name: {
                 type: Sequelize.STRING
+            },
+            displayName: {
+                type: Sequelize.STRING
             }
         }
     );

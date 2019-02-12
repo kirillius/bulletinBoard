@@ -1,0 +1,119 @@
+<div class="container">
+    <div class="row" style="padding-top: 30px; margin-bottom: 20px;">
+        <label>Что Вы хотите сделать?</label>
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="custom-control custom-radio col-md-2">
+                <input ng-value="1" ng-model="bulletin.sale" type="radio" class="custom-control-input" id="sale" name="eventBulletin">
+                <label class="custom-control-label" for="sale">Продать квартиру</label>
+            </div>
+            <div class="custom-control custom-radio col-md-5">
+                <input ng-value="0" ng-model="bulletin.sale" type="radio" class="custom-control-input" id="rent" name="eventBulletin">
+                <label class="custom-control-label" for="rent">Сдать квартиру в аренду</label>
+            </div>
+        </div>
+        <div class="row">
+            <form class="form-inline" role="form">
+                <ui-select ng-model="bulletin.typeId" theme="bootstrap" class="col-md-3" style="width: auto">
+                    <ui-select-match placeholder="Выберите тип объекта">{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="type.id as type in types">
+                        <div ng-bind-html="type.name"></div>
+                    </ui-select-choices>
+                </ui-select>
+                <ui-select ng-model="bulletin.typeSale" theme="bootstrap" class="col-md-3" style="width: auto">
+                    <ui-select-match placeholder="Выберите тип продажи">{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="item.id as item in parametersList.typeSale"
+                                       refresh="loadItemsSelect(ParametersByName.typeSale.id, 'typeSale')"
+                                       refresh-delay="0">
+                        <div ng-bind-html="item.name"></div>
+                    </ui-select-choices>
+                </ui-select>
+                <input ng-model="bulletin.cost" type="text" class="form-control" name="x" placeholder="Стоимость, руб.">
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <input ng-model="bulletin.adr" type="text" class="form-control" name="x" placeholder="Полный адрес, включая номер дома">
+    </div>
+    <div class="row" style="padding-top: 30px;">
+        <label>Информация о квартире</label>
+        <form class="form-inline row" role="form">
+            <ui-select ng-model="bulletin.countRooms" theme="bootstrap" class="col-md-3" style="width: auto">
+                <ui-select-match placeholder="Число комнат">{{$select.selected.name}}</ui-select-match>
+                <ui-select-choices repeat="item.id as item in parametersList.countRooms track by $index"
+                                   refresh="loadItemsSelect(ParametersByName.countRooms.id, 'countRooms')"
+                                   refresh-delay="0">
+                    <div ng-bind-html="item.name"></div>
+                </ui-select-choices>
+            </ui-select>
+            <input ng-model="bulletin.floor" type="text" class="form-control col-md-3" placeholder="Этаж">
+            <div class="custom-control col-md-2" style="padding-top: 7px;">
+                <input ng-model="bulletin.appartament" type="checkbox" class="custom-control-input" id="appartament">
+                <label class="custom-control-label" for="appartament">Аппартаменты</label>
+            </div>
+            <div class="custom-control col-md-2" style="padding-top: 7px;">
+                <input ng-model="bulletin.penthouse" type="checkbox" class="custom-control-input" id="penthouse">
+                <label class="custom-control-label" for="penthouse">Пентхаус</label>
+            </div>
+        </form>
+        <form class="form-inline customForm row" role="form">
+            <input ng-model="bulletin.mainArea" type="text" class="form-control" placeholder="Общая площадь, кв.м.">
+            <input ng-model="bulletin.liveArea" type="text" class="form-control" placeholder="Жилая площадь, кв.м.">
+            <input ng-model="bulletin.kitchenArea" type="text" class="form-control" placeholder="Площадь кухни, кв.м.">
+        </form>
+        <form class="form-inline row customFormTop" role="form">
+            <ui-select ng-model="bulletin.clothet" theme="bootstrap" class="col-md-3" style="width: auto">
+                <ui-select-match placeholder="Санузел">{{$select.selected.name}}</ui-select-match>
+                <ui-select-choices repeat="item.id as item in parametersList.clothet track by $index"
+                                   refresh="loadItemsSelect(ParametersByName.clothet.id, 'clothet')"
+                                   refresh-delay="0">
+                    <div ng-bind-html="item.name"></div>
+                </ui-select-choices>
+            </ui-select>
+            <div class="custom-control col-md-2" style="padding-top: 7px;">
+                <input ng-model="bulletin.balcony" ng-value="1" type="radio" class="custom-control-input" id="existsBalkon" name="balcony">
+                <label class="custom-control-label" for="existsBalkon">Есть балкон</label>
+            </div>
+            <div class="custom-control col-md-2" style="padding-top: 7px;">
+                <input ng-model="bulletin.balcony" ng-value="0" type="radio" class="custom-control-input" id="notBalkon" name="balcony">
+                <label class="custom-control-label" for="notBalkon">Балкона нет</label>
+            </div>
+        </form>
+        <form class="form-inline row customFormTop" role="form">
+            <ui-select ng-model="bulletin.state" theme="bootstrap" class="col-md-3" style="width: auto">
+                <ui-select-match placeholder="Состояние">{{$select.selected.name}}</ui-select-match>
+                <ui-select-choices repeat="item.id as item in parametersList.state track by $index"
+                                   refresh="loadItemsSelect(ParametersByName.state.id, 'state')"
+                                   refresh-delay="0">
+                    <div ng-bind-html="item.name"></div>
+                </ui-select-choices>
+            </ui-select>
+            <ui-select ng-model="bulletin.parking" theme="bootstrap" class="col-md-3" style="width: auto">
+                <ui-select-match placeholder="Парковка">{{$select.selected.name}}</ui-select-match>
+                <ui-select-choices repeat="item.id as item in parametersList.parking track by $index"
+                                   refresh="loadItemsSelect(ParametersByName.parking.id, 'parking')"
+                                   refresh-delay="0">
+                    <div ng-bind-html="item.name"></div>
+                </ui-select-choices>
+            </ui-select>
+        </form>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+        <label>Информация о доме</label>
+        <form class="form-inline customForm row" role="form">
+            <input ng-model="bulletin.yearBuild" type="text" class="form-control col-md-3" placeholder="Год постройки">
+        </form>
+    </div>
+    <div class="row" style="padding-top: 30px; margin-bottom: 10px;">
+        <label>Дополнительно</label>
+        <div class="checkbox" ng-repeat="item in parametersList.comfort">
+            <label>
+                <input type="checkbox" ng-value="item.id" ng-model="checkboxComfort"
+                ng-change="choiceCheckboxComfort(item.id, checkboxComfort)">
+                {{item.name}}
+            </label>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 10px;">
+        <button type="button" class="btn btn-success btnNextStep" ng-click="nextStep()">Шаг 2. Объявление и фото</button>
+    </div>
+</div>

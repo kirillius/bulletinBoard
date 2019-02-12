@@ -13,13 +13,37 @@ module.exports = function (sequelize, options, callback) {
             countRooms: {
                 type: Sequelize.INTEGER
             },
-            area: {
+            mainArea: {
                 type: Sequelize.FLOAT
             },
             kitchenArea: {
                 type: Sequelize.FLOAT
             },
+            liveArea: {
+                type: Sequelize.FLOAT
+            },
             floor: {
+                type: Sequelize.INTEGER
+            },
+            adr: {
+                type: Sequelize.INTEGER
+            },
+            sale: {
+                type: Sequelize.BOOLEAN
+            },
+            cost: {
+                type: Sequelize.FLOAT
+            },
+            penthouse: {
+                type: Sequelize.BOOLEAN
+            },
+            appartament: {
+                type: Sequelize.BOOLEAN
+            },
+            balcony: {
+                type: Sequelize.BOOLEAN
+            },
+            yearBuild: {
                 type: Sequelize.INTEGER
             }
         }
