@@ -1,0 +1,12 @@
+<div class="loginForm" ng-controller="LoginController">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control dataInput" placeholder="Логин" aria-label="Логин" aria-describedby="basic-addon2" ng-model="userData.login">
+    </div>
+    <div class="input-group mb-3">
+            <input type="text" class="form-control dataInput" placeholder="Пароль" aria-label="Пароль" aria-describedby="basic-addon2" ng-model="userData.password">
+    </div>
+    <div>
+        <button type="button" class="btn btn-success dataInput gfd" ng-click="userLogin(userData.login, userData.password)">Вход</button>
+        <button type="button" class="btn btn-success dataInput" ng-click="userRegister(userData.login, userData.password)">Регистрация</button>
+    </div>
+</div>
