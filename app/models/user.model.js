@@ -12,6 +12,9 @@ module.exports = function (sequelize, options, callback) {
             },
             login: {
                 type: Sequelize.STRING
+            },
+            password: {
+                type: Sequelize.STRING
             }
         }
     );

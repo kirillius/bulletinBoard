@@ -31,6 +31,17 @@ module.exports = function(sequelize) {
                 });
         },
         createParameters: function(req, res) {
+            Parameters.create({
+                insert: {id: req.params.id},
+                include: [{
+                    model: ParametersValue,
+                    as: 'values',
+                    foreignKey: 'parameterId'
+                }]
+            })
+                .then(function (parameter, err) {
+                   res.status(200).json(parameter);
+                });
         },
         updateParameters: function(req, res) {
         },

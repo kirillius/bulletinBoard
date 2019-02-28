@@ -4,7 +4,7 @@ module.exports = {
     'general': {
         database: {
             user: 'kirillius',
-            name: 'bulletinBoard'
+            name: 'bulletinBoardDB'
         }
     },
     'production': {
@@ -18,8 +18,8 @@ module.exports = {
     },
     'development': {
         database: {
-            user: 'kirillius',
-            password: 'kirillius1991',
+            user: 'Art',
+            password: '123a',
             server: 'localhost'
         }
     },
@@ -28,7 +28,6 @@ module.exports = {
 
         if(!app)
             app = {};
-
         return _.merge({}, this.general, this[app.get('env') || defaultEnvironment]);
     }
 };

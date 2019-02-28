@@ -5,6 +5,8 @@ var express = require("express"),
     methodOverride = require("method-override"),
     request = require("request"),
     session = require("express-session"),
+    passport = require("passport"),
+    flash = require('connect-flash'),
     Sequelize = require("sequelize");
 
 var app = express();
@@ -26,11 +28,15 @@ app.use(session({
     saveUninitialized: true
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
 // Старт express.js приложения, установка на определенный порт
 var server = app.listen(process.env.PORT || 2300, function () {
     var port = server.address().port;
     console.log("App now running on port " + port);
-});
+});``
 
 var sequelize = new Sequelize(config.database.name, config.database.user, config.database.password, {
     host: config.database.server,
@@ -54,7 +60,8 @@ sequelize
         // force true for recreate database tables
         require('./app/models').init(sequelize, {force: false}, function(){
             console.log('Models created success, created init data');
-            require('./app/routes')(app);
+            require('./app/routes')(app, passport);
+            require("./app/passport")(passport);
             /*require('./app/initData/index')(function() {
                 console.log('All init data created');
                 require('./app/routes')(app, sequelize, passport);

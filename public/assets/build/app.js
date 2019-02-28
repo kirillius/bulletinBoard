@@ -9,7 +9,8 @@ angular
         'ui.select',
         'app.general',
         'app.main',
-        'app.bulletin'
+        'app.bulletin',
+        'app.login'
     ])
     .config(['$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', 'AppPaths',
         function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, AppPaths) {
@@ -27,11 +28,17 @@ angular
         }])
     .run(['$rootScope', function($rootScope){
     }]);
-angular
+
+    angular
     .module('app.general', [
     ]);
 angular
     .module('app.bulletin', [
+        'ui.router',
+        'app.general'
+    ]);
+angular
+    .module('app.login', [
         'ui.router',
         'app.general'
     ]);
@@ -184,6 +191,7 @@ angular.module('app.bulletin')
         $scope.bulletin = {
             sale: 1
         };
+
         $scope.parametersList = {};
         $scope.getTypes = function() {
             rest.get('types').then(function(types) {
@@ -205,7 +213,7 @@ angular.module('app.bulletin')
                 $scope.parametersList.comfort = parameter.values;
             });
         };
-        $scope.getComfortItems();
+        //$scope.getComfortItems();
 
         $scope.nextStep = function() {
             console.log($scope.bulletin);
@@ -239,6 +247,34 @@ angular
                 templateUrl: AppPaths.bulletin + 'templates/index.html'
             });
     }]);
+angular.module('app.login')
+    .controller('LoginController', ['$scope', '$http', function($scope, $http) {
+        $scope.userData = {
+            login: '',
+            password: ''
+        };
+
+        $scope.userLogin = function(login, password) {
+            $http.post('/login', userData = {username: login, password: password});
+        };
+
+        $scope.userRegister = function(login, password) {
+            console.log(login, password);
+
+            $http.post('/register', userData = {username: login, password: password});
+        }
+     }]);
+angular
+    .module('app.login')
+    .config(['$stateProvider', 'AppPaths', function($stateProvider, AppPaths) {
+
+        $stateProvider
+            .state('app.login', {
+                url: 'userLogin',
+                controller: 'LoginController',
+                templateUrl: AppPaths.login + 'templates/index.html'
+            });
+    }]);
 angular.module('app.main')
     .controller('MainController', ['$scope', '$state', '$http', 'AppPaths', function($scope, $state, $http, AppPaths) {
     }]);
@@ -261,5 +297,6 @@ angular.module('app.general')
         app:            app_path,
         modules:        modules_path,
         main:      modules_path + 'main/',
-        bulletin:      modules_path + 'bulletin/'
+        bulletin:      modules_path + 'bulletin/',
+        login:      modules_path + 'login/'
     });

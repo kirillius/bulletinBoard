@@ -14,7 +14,7 @@ var paths = {
         'node_modules/ui-select/dist/select.css'
     ],
     app_styles: [
-        'public/assets/css/style.css'
+        'public/assets/login/templates/style.css'
     ],
     app_styles_login: [
         'public/assets/css/login.css'

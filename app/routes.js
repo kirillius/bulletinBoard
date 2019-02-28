@@ -1,6 +1,6 @@
 var _ = require('lodash');
 
-module.exports = function(app){
+module.exports = function(app, passport){
 
     var controllers = require('./controllers')();
     var helpers = require('./helpers');
@@ -38,6 +38,12 @@ module.exports = function(app){
 
         if(controller['delete' + UpperFirstName])
             app.delete("/api/" + modelName + "/:id", controller['delete' + UpperFirstName]);
+
+        app.post('/login', passport.authenticate('local', {failureRedirect: '/loginfail'}), function(req, res) {
+            res.redirect('/');
+        });
+
+        app.post('/register', helpers.auth.registerUser);
 
         console.log('rest routes for resource ' + modelName + ' is defined');
     }

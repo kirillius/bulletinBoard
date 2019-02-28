@@ -19,23 +19,30 @@
     "body-parser": "^1.18.3",
     "bootstrap": "^3.3.7",
     "browserify": "^16.2.3",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
     "debug": "~2.6.9",
-    "express": "~4.16.0",
+    "express": "^4.16.4",
     "express-session": "^1.15.6",
-    "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-size": "^3.0.0",
     "http-errors": "~1.6.2",
     "lodash": "^4.17.11",
+    "md5": "^2.2.1",
     "method-override": "^3.0.0",
     "moment": "^2.22.2",
     "morgan": "~1.9.0",
-    "pug": "2.0.0-beta11",
+    "mssql": "^4.3.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.3",
     "request": "^2.88.0",
     "sequelize": "^4.41.0",
     "tedious": "^3.0.1",
     "ui-select": "^0.19.8",
     "vinyl-source-stream": "^2.0.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
   }
 }

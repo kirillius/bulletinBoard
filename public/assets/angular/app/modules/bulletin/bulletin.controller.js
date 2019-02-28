@@ -4,6 +4,7 @@ angular.module('app.bulletin')
         $scope.bulletin = {
             sale: 1
         };
+
         $scope.parametersList = {};
         $scope.getTypes = function() {
             rest.get('types').then(function(types) {
@@ -25,7 +26,7 @@ angular.module('app.bulletin')
                 $scope.parametersList.comfort = parameter.values;
             });
         };
-        $scope.getComfortItems();
+        //$scope.getComfortItems();
 
         $scope.nextStep = function() {
             console.log($scope.bulletin);

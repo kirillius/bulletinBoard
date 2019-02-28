@@ -1,3 +1,4 @@
-angular
+
+    angular
     .module('app.general', [
     ]);
