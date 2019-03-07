@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="assets/build/vendor.css">
+    <link rel="stylesheet" href="assets/build/login.css">
+
+    <title>Регистрация</title>
+    <script>
+        function CheckInputData() {
+            var l = document.getElementsByName('username')[0].value;
+            var p = document.getElementsByName('password')[0].value;
+            var fieldName;
+
+            if (l.length < 3) fieldName = 'логина';
+            else if (p.length < 3) fieldName = 'пароля';
+
+            var warningElement = document.getElementById('error');
+
+            if (fieldName) {
+                warningElement.innerText = 'Длина ' + fieldName + ' должна быть больше трёх символов';
+                warningElement.setAttribute('style', 'color: red; margin-left: 10px;');
+                document.body.appendChild(warningElement);
+            } else
+            {
+                warningElement.innerText = '';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="loginForm">
+        <form action="/register" method="post">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control dataInput" placeholder="Имя" aria-label="Имя" aria-describedby="basic-addon2" name="fio">
+            </div>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control dataInput" placeholder="Логин" aria-label="Логин" aria-describedby="basic-addon2" name="username">
+            </div>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control dataInput" placeholder="Пароль" aria-label="Пароль" aria-describedby="basic-addon2" name="password">
+            </div>
+            <div class="center">
+                <button type="submit" onClick="CheckInputData()" class="btn btn-success dataInput">Зарегистрироваться</button>
+            </div>
+            <div class="center">
+                <a href="auth.html">Авторизация</a>
+            </div>
+        </form>
+        <div id="error"></div>
+    </div>
+</body>
+</html>

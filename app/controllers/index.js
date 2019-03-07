@@ -1,6 +1,6 @@
 module.exports = function(sequelize) {
     var controllers = [
-        'types', 'parameters', 'users'
+        'types', 'parameters'
     ];
 
     var result = {};

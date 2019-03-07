@@ -26,7 +26,7 @@ angular.module('app.bulletin')
                 $scope.parametersList.comfort = parameter.values;
             });
         };
-        //$scope.getComfortItems();
+        $scope.getComfortItems();
 
         $scope.nextStep = function() {
             console.log($scope.bulletin);

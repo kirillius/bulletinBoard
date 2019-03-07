@@ -9,8 +9,7 @@ angular
         'ui.select',
         'app.general',
         'app.main',
-        'app.bulletin',
-        'app.login'
+        'app.bulletin'
     ])
     .config(['$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', 'AppPaths',
         function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, AppPaths) {

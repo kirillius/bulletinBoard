@@ -19,6 +19,7 @@ app.locals.public_dir = __dirname + '/public';
 // Указание на frontend папку как публичную, подключение вспомогательных модулей в express.js
 app.use(express.static(__dirname + "/public"));
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride());
 
@@ -28,6 +29,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
+require("./app/passport")(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -61,7 +63,6 @@ sequelize
         require('./app/models').init(sequelize, {force: false}, function(){
             console.log('Models created success, created init data');
             require('./app/routes')(app, passport);
-            require("./app/passport")(passport);
             /*require('./app/initData/index')(function() {
                 console.log('All init data created');
                 require('./app/routes')(app, sequelize, passport);

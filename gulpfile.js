@@ -14,7 +14,7 @@ var paths = {
         'node_modules/ui-select/dist/select.css'
     ],
     app_styles: [
-        'public/assets/login/templates/style.css'
+        'public/assets/css/style.css'
     ],
     app_styles_login: [
         'public/assets/css/login.css'
@@ -76,7 +76,7 @@ gulp.task('appCSS', function() {
 });
 
 gulp.task('appLoginCSS', function() {
-    return gulp.src(paths.app_styles)
+    return gulp.src(paths.app_styles_login)
         .pipe(concat('login.css'))
         .pipe(gulp.dest(build_dir))
         .pipe(size({title: 'login.css'}));
@@ -93,7 +93,7 @@ gulp.task('watch', function() {
 
     gulp.watch(paths.app_scripts, ['appJS']);
     gulp.watch(paths.app_styles, ['appCSS']);
-    gulp.watch(paths.app_styles, ['appLoginCSS']);
+    gulp.watch(paths.app_styles_login, ['appLoginCSS']);
 });
 
 gulp.task('default', ['vendorJS', 'vendorCSS', 'vendorFONTS', 'appJS', 'appCSS', 'appLoginCSS', 'watch']);

@@ -11,10 +11,18 @@ module.exports = {
         return function(error) {
             console.log("err: ");
             console.log(error);
+
             res.status(500).json(error);
         }
     },
     generateMainPage : function(req, res) {
-        res.sendfile('./public/main.html');
+        if (req.isAuthenticated()) {
+            res.sendfile('./public/main.html');
+            //res.sendfile(path.resolve('./public/main.html'));
+        }
+        else {
+            res.sendfile('./public/auth.html');
+            //res.sendfile(path.resolve('../public/auth.html'));
+        }
     }
 };

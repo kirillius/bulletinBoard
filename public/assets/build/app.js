@@ -9,8 +9,7 @@ angular
         'ui.select',
         'app.general',
         'app.main',
-        'app.bulletin',
-        'app.login'
+        'app.bulletin'
     ])
     .config(['$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', 'AppPaths',
         function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, AppPaths) {
@@ -28,19 +27,14 @@ angular
         }])
     .run(['$rootScope', function($rootScope){
     }]);
-
-    angular
-    .module('app.general', [
-    ]);
 angular
     .module('app.bulletin', [
         'ui.router',
         'app.general'
     ]);
-angular
-    .module('app.login', [
-        'ui.router',
-        'app.general'
+
+    angular
+    .module('app.general', [
     ]);
 angular
     .module('app.main', [
@@ -213,7 +207,7 @@ angular.module('app.bulletin')
                 $scope.parametersList.comfort = parameter.values;
             });
         };
-        //$scope.getComfortItems();
+        $scope.getComfortItems();
 
         $scope.nextStep = function() {
             console.log($scope.bulletin);
@@ -245,34 +239,6 @@ angular
                 url: 'newBulletin',
                 controller: 'BulletinController',
                 templateUrl: AppPaths.bulletin + 'templates/index.html'
-            });
-    }]);
-angular.module('app.login')
-    .controller('LoginController', ['$scope', '$http', function($scope, $http) {
-        $scope.userData = {
-            login: '',
-            password: ''
-        };
-
-        $scope.userLogin = function(login, password) {
-            $http.post('/login', userData = {username: login, password: password});
-        };
-
-        $scope.userRegister = function(login, password) {
-            console.log(login, password);
-
-            $http.post('/register', userData = {username: login, password: password});
-        }
-     }]);
-angular
-    .module('app.login')
-    .config(['$stateProvider', 'AppPaths', function($stateProvider, AppPaths) {
-
-        $stateProvider
-            .state('app.login', {
-                url: 'userLogin',
-                controller: 'LoginController',
-                templateUrl: AppPaths.login + 'templates/index.html'
             });
     }]);
 angular.module('app.main')

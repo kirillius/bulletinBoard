@@ -16,7 +16,12 @@ module.exports = function(app, passport){
     defineRestResource('types');
     defineRestResource('parameters');
 
-    //app.get("/*", helpers.auth.checkAuth, helpers.common.generateMainPage);
+    app.post('/login', passport.authenticate('local', {failureRedirect: '/loginfail'}), function(req, res) {
+        res.redirect('/');
+    });
+
+    app.post('/register', helpers.auth.registerUser);
+
     app.get("/*", helpers.common.generateMainPage);
 
     function defineRestResource(modelName){
@@ -38,12 +43,6 @@ module.exports = function(app, passport){
 
         if(controller['delete' + UpperFirstName])
             app.delete("/api/" + modelName + "/:id", controller['delete' + UpperFirstName]);
-
-        app.post('/login', passport.authenticate('local', {failureRedirect: '/loginfail'}), function(req, res) {
-            res.redirect('/');
-        });
-
-        app.post('/register', helpers.auth.registerUser);
 
         console.log('rest routes for resource ' + modelName + ' is defined');
     }
