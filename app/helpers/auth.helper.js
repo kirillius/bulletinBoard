@@ -16,11 +16,12 @@ module.exports = {
 
     registerUser: function(req, res) {
         var User = require('../models').user;
-        console.log('Логин: \"' + req.body.username + '\" Пароль: \"' + req.body.password + '\"');
+        console.log('Логин: \"' + req.body.username + '\" Пароль: \"' + req.body.password + '\ Пароль_2: \"' + req.body.repassword + '\"');
         if (req.body.username.length < 3) {
             console.log('Логин должен содержать не менее 3-ёх символов');
         }
-        else if(req.body.username.includes(' ')) console.log('Логин не может содержать пробелы');
+        else if (req.body.username.includes(' ')) console.log('Логин не может содержать пробелы');
+        else if (req.body.password != req.body.repassword) console.log('Пароли не совпадают');
         else {
             if (req.body.password.length < 3) {
                 console.log('Пароль должен содержать не менее 3-ёх символов');
@@ -56,6 +57,7 @@ module.exports = {
     },
 
     logOut: function(req, res) {
-
-    }
+        req.logout();
+        res.redirect('/');
+    },
 }

@@ -22,6 +22,8 @@ module.exports = function(app, passport){
 
     app.post('/register', helpers.auth.registerUser);
 
+    app.get('/logout', helpers.auth.logOut);
+
     app.get("/*", helpers.common.generateMainPage);
 
     function defineRestResource(modelName){

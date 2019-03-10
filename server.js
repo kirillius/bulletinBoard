@@ -38,7 +38,7 @@ app.use(flash());
 var server = app.listen(process.env.PORT || 2300, function () {
     var port = server.address().port;
     console.log("App now running on port " + port);
-});``
+});
 
 var sequelize = new Sequelize(config.database.name, config.database.user, config.database.password, {
     host: config.database.server,
