@@ -2,7 +2,7 @@ angular.module('app.bulletin')
     .controller('BulletinController', ['$scope', '$state', '$http', 'AppPaths', 'rest', 'ParametersByName', 'Parameters', function($scope, $state, $http, AppPaths, rest, ParametersByName, Parameters) {
 
         $scope.bulletin = {
-            sale: 1
+            sale: 0
         };
 
         $scope.parametersList = {};
@@ -30,6 +30,7 @@ angular.module('app.bulletin')
 
         $scope.nextStep = function() {
             console.log($scope.bulletin);
+            localStorage.setItem('userBulletin', JSON.stringify($scope.bulletin));
         }
 
         $scope.choiceCheckboxComfort = function(itemId, value) {

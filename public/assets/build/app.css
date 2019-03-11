@@ -48,7 +48,7 @@ body > .container {
 }
 
 .blockInMain:hover {
-    background: #00ff00; /* Цвет фона под ссылкой */
+    background: #2eb92e; /* Цвет фона под ссылкой */
     color: #fff; /* Цвет ссылки */
 }
 /*input { width: 500px !important; } */

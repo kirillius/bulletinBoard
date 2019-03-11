@@ -63,10 +63,9 @@ sequelize
         require('./app/models').init(sequelize, {force: false}, function(){
             console.log('Models created success, created init data');
             require('./app/routes')(app, passport);
-            /*require('./app/initData/index')(function() {
+            require('./app/initData/index')(function() {
                 console.log('All init data created');
-                require('./app/routes')(app, sequelize, passport);
-            });*/
+            });
         });
     })
     .catch(function (err) {
