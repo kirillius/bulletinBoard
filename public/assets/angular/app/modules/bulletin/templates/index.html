@@ -105,13 +105,15 @@
     </div>
     <div class="row" style="padding-top: 30px; margin-bottom: 10px;">
         <label>Дополнительно</label>
-        <div class="checkbox" ng-repeat="item in parametersList.comfort">
-            <label>
-                <input type="checkbox" ng-value="item.id" ng-model="checkboxComfort"
-                ng-change="choiceCheckboxComfort(item.id, checkboxComfort)">
-                {{item.name}}
-            </label>
-        </div>
+        <form class="form-inline">
+            <div class="checkbox" ng-repeat="item in parametersList.comfort">
+                <label>
+                    <input type="checkbox" ng-value="item.id" ng-model="checkboxComfort"
+                    ng-change="choiceCheckboxComfort(item.id, checkboxComfort)">
+                    {{item.name}}
+                </label>
+            </div>
+        </form>
     </div>
     <div class="row" style="margin-bottom: 10px;">
         <button type="button" class="btn btn-success btnNextStep" ng-click="nextStep()">Шаг 2. Объявление и фото</button>
