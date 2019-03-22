@@ -9,7 +9,8 @@ angular
         'ui.select',
         'app.general',
         'app.main',
-        'app.bulletin'
+        'app.bulletin',
+        'app.photoUpload'
     ])
     .config(['$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', 'AppPaths',
         function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, AppPaths) {

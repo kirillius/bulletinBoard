@@ -1,0 +1,30 @@
+<!-- FIXME: нужен ли этот файл? Создал контроллер отдельно, в котором есть содержимое этого файла в index.html-->
+
+<script src="angular.min.js"></script>
+<!-- shim is needed to support non-HTML5 FormData browsers (IE8-9)-->
+<script src="ng-file-upload-shim.min.js"></script>
+<script src="ng-file-upload.min.js"></script>
+
+<div class="container" style="padding-top: 30px">
+    <div class="row">
+        <div class="button" ngf-select ng-model="files" ngf-multiple="true">Select</div>
+        <button ngf-select="uploadFiles($files, $invalidFiles)" multiple
+                accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+            Select Files</button>
+        <input type="file" class="button" ngf-select ng-model="files" ngf-multiple="true">Select</input>
+        <label>Текст объявления</label>
+        <form class="form-inline row customForm">
+            <textarea class="form-control" rows="4" cols="60" placeholder="Введите текст объявления" name="comment"></textarea>
+        </form>
+    </div>
+    <div class="row" style="margin-top: 10px">
+        <label>Добавление фотографий</label>
+        <div>
+            <button type="button" class="btn btn-success">Загрузить...</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <button type="submit" class="btn btn-success" style="margin-top: 20px">Отправить объявление</button>
+    </div>
+</div>

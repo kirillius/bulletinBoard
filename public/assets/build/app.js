@@ -9,7 +9,8 @@ angular
         'ui.select',
         'app.general',
         'app.main',
-        'app.bulletin'
+        'app.bulletin',
+        'app.photoUpload'
     ])
     .config(['$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', 'AppPaths',
         function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, AppPaths) {
@@ -38,6 +39,11 @@ angular
     ]);
 angular
     .module('app.main', [
+        'ui.router',
+        'app.general'
+    ]);
+angular
+    .module('app.photoUpload', [
         'ui.router',
         'app.general'
     ]);
@@ -212,7 +218,7 @@ angular.module('app.bulletin')
         $scope.nextStep = function() {
             console.log($scope.bulletin);
             localStorage.setItem('userBulletin', JSON.stringify($scope.bulletin));
-        }
+        };
 
         $scope.choiceCheckboxComfort = function(itemId, value) {
             if(!$scope.bulletin.comfortItems)
@@ -239,7 +245,8 @@ angular
             .state('app.bulletin', {
                 url: 'newBulletin',
                 controller: 'BulletinController',
-                templateUrl: AppPaths.bulletin + 'templates/index.html'
+                templateUrl: AppPaths.bulletin + 'templates/step2.html'
+                /*templateUrl: AppPaths.bulletin + 'templates/index.html'*/ // FIXME: вернуть
             });
     }]);
 angular.module('app.main')
@@ -254,6 +261,42 @@ angular
                 url: '',
                 controller: 'MainController',
                 templateUrl: AppPaths.main + 'templates/index.html'
+            });
+    }]);
+angular.module('app.photoUpload')//, ['ngFileUpload']) // FIXME: убрал, чтобы запустить
+    .controller('PhotoUploadController', ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
+    $scope.uploadFiles = function(files, errFiles) {
+        $scope.files = files;
+        $scope.errFiles = errFiles;
+        angular.forEach(files, function(file) {
+            file.upload = Upload.upload({
+                url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+                data: {file: file}
+            });
+
+            file.upload.then(function (response) {
+                $timeout(function () {
+                    file.result = response.data;
+                });
+            }, function (response) {
+                if (response.status > 0)
+                    $scope.errorMsg = response.status + ': ' + response.data;
+            }, function (evt) {
+                file.progress = Math.min(100, parseInt(100.0 *
+                    evt.loaded / evt.total));
+            });
+        });
+    }
+}]);
+angular
+    .module('app.photoUpload')
+    .config(['$stateProvider', 'AppPaths', function($stateProvider, AppPaths) {
+
+        $stateProvider
+            .state('app.photoUpload', {
+                url: 'testPhoto',
+                controller: 'PhotoUploadController',
+                templateUrl: AppPaths.photoUpload + 'templates/index.html'
             });
     }]);
 var app_path = 'assets/angular/app/',

@@ -4,7 +4,7 @@ module.exports = {
     'general': {
         database: {
             user: 'kirillius',
-            name: 'bulletinBoard'
+            name: 'bulletinBoardDB'
         }
     },
     'production': {

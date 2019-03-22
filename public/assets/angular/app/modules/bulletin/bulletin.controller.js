@@ -31,7 +31,7 @@ angular.module('app.bulletin')
         $scope.nextStep = function() {
             console.log($scope.bulletin);
             localStorage.setItem('userBulletin', JSON.stringify($scope.bulletin));
-        }
+        };
 
         $scope.choiceCheckboxComfort = function(itemId, value) {
             if(!$scope.bulletin.comfortItems)
