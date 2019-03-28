@@ -10,7 +10,7 @@ angular
         'app.general',
         'app.main',
         'app.bulletin',
-        'app.photoUpload'
+        'ngFileUpload'
     ])
     .config(['$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', 'AppPaths',
         function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, AppPaths) {
@@ -39,11 +39,6 @@ angular
     ]);
 angular
     .module('app.main', [
-        'ui.router',
-        'app.general'
-    ]);
-angular
-    .module('app.photoUpload', [
         'ui.router',
         'app.general'
     ]);
@@ -186,7 +181,7 @@ angular
         return service;
     }]);
 angular.module('app.bulletin')
-    .controller('BulletinController', ['$scope', '$state', '$http', 'AppPaths', 'rest', 'ParametersByName', 'Parameters', function($scope, $state, $http, AppPaths, rest, ParametersByName, Parameters) {
+    .controller('BulletinController', ['$scope', '$state', '$http', 'AppPaths', 'rest', 'ParametersByName', 'Parameters', 'Upload', '$timeout', function($scope, $state, $http, AppPaths, rest, ParametersByName, Parameters, Upload, $timeout) {
 
         $scope.bulletin = {
             sale: 0
@@ -218,7 +213,21 @@ angular.module('app.bulletin')
         $scope.nextStep = function() {
             console.log($scope.bulletin);
             localStorage.setItem('userBulletin', JSON.stringify($scope.bulletin));
+            $state.go('app.bulletinStep2');
         };
+
+        $scope.saveBulletin = function() {
+            var newObj = JSON.parse(localStorage.getItem('userBulletin'));
+            var photoIdObj = [];
+
+            for (var num in $scope.photos)
+                photoIdObj.push($scope.photos[num].id);
+
+            newObj['oomment'] = $scope.bulletin.comment;
+            newObj['photos'] = photoIdObj;
+
+            localStorage.setItem('userBulletin', JSON.stringify(newObj));
+        }
 
         $scope.choiceCheckboxComfort = function(itemId, value) {
             if(!$scope.bulletin.comfortItems)
@@ -235,7 +244,74 @@ angular.module('app.bulletin')
                 _.remove($scope.bulletin.comfortItems, function(item) {
                     return item===itemId;
                 });
-        }
+        };
+
+        $scope.maxFiles = 7;
+
+/*        $scope.uploadFiles = function(files, errFiles) {
+            $scope.files = files;
+            $scope.errFiles = errFiles;
+            angular.forEach(files, function(file) {
+                file.upload = Upload.upload({
+                    url: 'upload',
+                    data: {file: file}
+                });
+
+                file.upload.then(function (response) {
+                    $timeout(function () {
+                        file.result = response.data;
+                    });
+                }, function (response) {
+                    if (response.status > 0)
+                        $scope.errorMsg = response.status + ': ' + response.data;
+                }, function (evt) {
+                    file.progress = Math.min(100, parseInt(100.0 *
+                        evt.loaded / evt.total));
+                });
+            });
+        };*/
+
+        $scope.fileAdded = function (files) {
+            // на случай ложных срабатываний (таковые бывают) проверяем не пустой ли file
+            $scope.files = files;
+            $scope.photos = [];
+
+            if (files && files.length) {
+                $scope.uploadFile = true;
+                var data = {
+                    id: $scope.bulletin.idObject
+                };
+
+                data['files'] = files;
+
+                Upload.upload({
+                    url: '/upload',
+                    arrayKey: '',
+                    data: data
+                })
+                    .then(function (response) {
+                        if (response.data.id) {
+                            console.log(response.data.id);
+                            $scope.photos.idObject = response.data.id;
+                        }
+
+                        if (response.data.files && response.data.files.length) {
+                            _.forEach(response.data.files, function(file) {
+                                var objPhoto = {
+                                    id : file.id,
+                                    url : file.fullPath,
+                                    thumbUrl : file.fullPath,
+                                    deletable : true
+                                }
+                                $scope.photos.push(objPhoto);
+                            });
+                        }
+                        console.log($scope.photos);
+                        $scope.uploadFile = false;
+                    });
+            }
+        };
+
     }]);
 angular
     .module('app.bulletin')
@@ -245,8 +321,12 @@ angular
             .state('app.bulletin', {
                 url: 'newBulletin',
                 controller: 'BulletinController',
+                templateUrl: AppPaths.bulletin + 'templates/index.html'
+            })
+            .state('app.bulletinStep2', {
+                url: 'newBulletin2',
+                controller: 'BulletinController',
                 templateUrl: AppPaths.bulletin + 'templates/step2.html'
-                /*templateUrl: AppPaths.bulletin + 'templates/index.html'*/ // FIXME: вернуть
             });
     }]);
 angular.module('app.main')
@@ -261,42 +341,6 @@ angular
                 url: '',
                 controller: 'MainController',
                 templateUrl: AppPaths.main + 'templates/index.html'
-            });
-    }]);
-angular.module('app.photoUpload')//, ['ngFileUpload']) // FIXME: убрал, чтобы запустить
-    .controller('PhotoUploadController', ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
-    $scope.uploadFiles = function(files, errFiles) {
-        $scope.files = files;
-        $scope.errFiles = errFiles;
-        angular.forEach(files, function(file) {
-            file.upload = Upload.upload({
-                url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
-                data: {file: file}
-            });
-
-            file.upload.then(function (response) {
-                $timeout(function () {
-                    file.result = response.data;
-                });
-            }, function (response) {
-                if (response.status > 0)
-                    $scope.errorMsg = response.status + ': ' + response.data;
-            }, function (evt) {
-                file.progress = Math.min(100, parseInt(100.0 *
-                    evt.loaded / evt.total));
-            });
-        });
-    }
-}]);
-angular
-    .module('app.photoUpload')
-    .config(['$stateProvider', 'AppPaths', function($stateProvider, AppPaths) {
-
-        $stateProvider
-            .state('app.photoUpload', {
-                url: 'testPhoto',
-                controller: 'PhotoUploadController',
-                templateUrl: AppPaths.photoUpload + 'templates/index.html'
             });
     }]);
 var app_path = 'assets/angular/app/',

@@ -19,7 +19,7 @@ module.exports = {
     'development': {
         database: {
             user: 'Art',
-            password: '123a',
+            password: '1234a',
             server: 'localhost'
         }
     },

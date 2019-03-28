@@ -6,7 +6,11 @@ angular
             .state('app.bulletin', {
                 url: 'newBulletin',
                 controller: 'BulletinController',
+                templateUrl: AppPaths.bulletin + 'templates/index.html'
+            })
+            .state('app.bulletinStep2', {
+                url: 'newBulletin2',
+                controller: 'BulletinController',
                 templateUrl: AppPaths.bulletin + 'templates/step2.html'
-                /*templateUrl: AppPaths.bulletin + 'templates/index.html'*/ // FIXME: вернуть
             });
     }]);

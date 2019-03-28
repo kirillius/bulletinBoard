@@ -10,7 +10,7 @@ angular
         'app.general',
         'app.main',
         'app.bulletin',
-        'app.photoUpload'
+        'ngFileUpload'
     ])
     .config(['$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', 'AppPaths',
         function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, AppPaths) {

@@ -11,3 +11,4 @@ require('angular-messages');
 require('angular-sanitize');
 require('angular-ui-bootstrap');
 require('ui-select');
+require('ng-file-upload');
