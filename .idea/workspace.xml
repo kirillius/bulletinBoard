@@ -477,28 +477,28 @@
     </option>
   </component>
   <component name="RunManager" selected="Node.js.nodejs">
-    <configuration name="index.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/BulletinBoard/public/assets/angular/app/modules/login/templates/index.html">
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/BulletinBoard/public/assets/angular/app/modules/login/templates/index.html">
       <method v="2" />
     </configuration>
-    <configuration name="main.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/BulletinBoard/public/main.html">
+    <configuration name="main.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/BulletinBoard/public/main.html">
       <method v="2" />
     </configuration>
-    <configuration name="config.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="config.js" working-dir="$PROJECT_DIR$/app">
+    <configuration name="config.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="config.js" working-dir="$PROJECT_DIR$/app">
       <method v="2" />
     </configuration>
-    <configuration name="index.js (1)" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="index.js" working-dir="$PROJECT_DIR$/app/models">
+    <configuration name="index.js (1)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="index.js" working-dir="$PROJECT_DIR$/app/models">
       <method v="2" />
     </configuration>
-    <configuration name="routes.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="routes.js" working-dir="$PROJECT_DIR$/app">
+    <configuration name="routes.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="routes.js" working-dir="$PROJECT_DIR$/app">
       <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Node.js.nodejs" />
+      <item itemvalue="JavaScript Debug.index.html" />
       <item itemvalue="JavaScript Debug.main.html" />
       <item itemvalue="Node.js.config.js" />
-      <item itemvalue="Node.js.routes.js" />
       <item itemvalue="Node.js.index.js (1)" />
-      <item itemvalue="JavaScript Debug.index.html" />
+      <item itemvalue="Node.js.routes.js" />
     </list>
     <recent_temporary>
       <list>
