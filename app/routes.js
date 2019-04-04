@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var multer = require('multer')
+var multer = require('multer');
 
 module.exports = function(app, passport){
 
@@ -8,7 +8,7 @@ module.exports = function(app, passport){
 
     var storage = multer.diskStorage({ //multers disk storage settings
         destination: function (req, file, cb) {
-            cb(null, './uploads/')
+            cb(null, 'public/uploads/')
         },
         filename: function (req, file, cb) {
             var datetimestamp = Date.now();
@@ -40,6 +40,8 @@ module.exports = function(app, passport){
     app.get('/logout', helpers.auth.logOut);
 
     app.post('/upload', upload, helpers.files.upload);
+
+    app.post('/delete', helpers.files.delete);
 
     app.get("/*", helpers.common.generateMainPage);
 

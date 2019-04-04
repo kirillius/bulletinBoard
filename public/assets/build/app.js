@@ -10,7 +10,8 @@ angular
         'app.general',
         'app.main',
         'app.bulletin',
-        'ngFileUpload'
+        'ngFileUpload',
+        'thatisuday.ng-image-gallery'
     ])
     .config(['$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', 'AppPaths',
         function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, AppPaths) {
@@ -181,7 +182,7 @@ angular
         return service;
     }]);
 angular.module('app.bulletin')
-    .controller('BulletinController', ['$scope', '$state', '$http', 'AppPaths', 'rest', 'ParametersByName', 'Parameters', 'Upload', '$timeout', function($scope, $state, $http, AppPaths, rest, ParametersByName, Parameters, Upload, $timeout) {
+    .controller('BulletinController', ['$scope', '$state', '$http', '$timeout', 'AppPaths', 'rest', 'ParametersByName', 'Parameters', 'Upload', function($scope, $state, $http, $timeout, AppPaths, rest, ParametersByName, Parameters, Upload) {
 
         $scope.bulletin = {
             sale: 0
@@ -227,7 +228,7 @@ angular.module('app.bulletin')
             newObj['photos'] = photoIdObj;
 
             localStorage.setItem('userBulletin', JSON.stringify(newObj));
-        }
+        };
 
         $scope.choiceCheckboxComfort = function(itemId, value) {
             if(!$scope.bulletin.comfortItems)
@@ -247,34 +248,12 @@ angular.module('app.bulletin')
         };
 
         $scope.maxFiles = 7;
-
-/*        $scope.uploadFiles = function(files, errFiles) {
-            $scope.files = files;
-            $scope.errFiles = errFiles;
-            angular.forEach(files, function(file) {
-                file.upload = Upload.upload({
-                    url: 'upload',
-                    data: {file: file}
-                });
-
-                file.upload.then(function (response) {
-                    $timeout(function () {
-                        file.result = response.data;
-                    });
-                }, function (response) {
-                    if (response.status > 0)
-                        $scope.errorMsg = response.status + ': ' + response.data;
-                }, function (evt) {
-                    file.progress = Math.min(100, parseInt(100.0 *
-                        evt.loaded / evt.total));
-                });
-            });
-        };*/
+        $scope.photos = [];
 
         $scope.fileAdded = function (files) {
             // на случай ложных срабатываний (таковые бывают) проверяем не пустой ли file
+
             $scope.files = files;
-            $scope.photos = [];
 
             if (files && files.length) {
                 $scope.uploadFile = true;
@@ -297,6 +276,7 @@ angular.module('app.bulletin')
 
                         if (response.data.files && response.data.files.length) {
                             _.forEach(response.data.files, function(file) {
+                                if ($scope.photos.length >= $scope.maxFiles) return;
                                 var objPhoto = {
                                     id : file.id,
                                     url : file.fullPath,
@@ -312,6 +292,20 @@ angular.module('app.bulletin')
             }
         };
 
+        // Gallery methods gateway
+        $scope.methods = {};
+        $scope.openGallery = function(){
+            $scope.methods.open();
+        };
+
+        $scope.delete = function(img, cb){
+            $http({
+                url: '/delete',
+                method: "POST",
+                data: {'photo': img}
+            })
+            cb();
+        }
     }]);
 angular
     .module('app.bulletin')

@@ -1,5 +1,7 @@
 var _ = require('lodash');
 var async = require('async');
+var path = require('path');
+var fs = require('fs');
 
 module.exports = {
     /*upload: function(req, res) {
@@ -22,10 +24,11 @@ module.exports = {
             //fs.mkdirSync(pathToFolderEntity);
 
         async.eachOfSeries(req.files, function (fileObject, index, eachCallback) {
-
+            console.log(req.files);
             var Photos = require('../models').photo;
             var newFile = {
                 name: fileObject.filename,
+                fullPath: 'uploads/' + fileObject.filename,
                 //path: pathToFolderEntity,
                 //ownerId: req.body.id
             };
@@ -54,4 +57,16 @@ module.exports = {
             response.files.push(file);
         }
     },
+
+    delete: function(req,res) {
+        console.log('deleting...', req.body);
+        var Photos = require('../models').photo;
+        Photos.destroy({where: {id: req.body.photo.id}});
+        fs.unlink('public/' + req.body.photo.url, err => {
+            if (err) return console.log(err);
+            console.log('deleting was succesful');
+        });
+        //Photos.destroy({where: {id: req.body.id}});
+        //Photos.destroy({where: {id: {$in: req.body.photos.id}}});
+    }
 }

@@ -10,18 +10,14 @@
         <div>
             <button type="button" class="btn btn-success" form="form-step2" ngf-multiple="true" ngf-select="fileAdded($files)" ngf-max-files="{{maxFiles}}" ngf-pattern="'.jpg,.png'" accept=".jpg,.png">Загрузить...</button>
             <div>
-                Фотографии:
-                <ol>
-                    <li ng-repeat="f in files" style="width:20%">{{f.name}}
-                        <span class="progress" ng-show="f.progress >= 0" style="color:orange">
-                            <div style="width:{{progress}}%; background-color:#5cb85c; color:white; text-align:right; padding-right:10px; border-radius:7px;" ng-bind="progress + '%'"></div>
-                        </span>
-                </ol>
-                {{errorMsg}}
+                <span>Фотографии:</span>
+                <ng-image-gallery images="photos" methods="methods" conf="conf" thumbnails="thumbnails" thumb-size="thumbSize" inline="inline" bubbles="bubbles" bubble-size="bubbleSize" img-bubbles="imgBubbles" bg-close="bgClose" piracy="true" on-open="opened();" on-close="closed();" on-delete="delete(img, cb)" bg-close="false"></ng-image-gallery>
             </div>
         </div>
     </div>
+
     <div class="row">
         <button class="btn btn-success" style="margin-top: 20px" ng-click="saveBulletin()">Отправить объявление</button>
+    </div>
     </div>
 </div>
