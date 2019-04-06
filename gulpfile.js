@@ -12,7 +12,7 @@ var paths = {
     vendor_styles: [
         'node_modules/bootstrap/dist/css/bootstrap.css',
         'node_modules/ui-select/dist/select.css',
-        'node_modules/ng-image/gallery/dist/ng-image-gallery.css'
+        'node_modules/ng-image-gallery/dist/ng-image-gallery.css'
     ],
     app_styles: [
         'public/assets/css/style.css'
