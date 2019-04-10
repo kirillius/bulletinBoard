@@ -1,9 +1,24 @@
 var _ = require('lodash');
+var multer = require('multer');
 
 module.exports = function(app, passport){
 
     var controllers = require('./controllers')();
     var helpers = require('./helpers');
+
+    var storage = multer.diskStorage({ //multers disk storage settings
+        destination: function (req, file, cb) {
+            cb(null, 'public/uploads/')
+        },
+        filename: function (req, file, cb) {
+            var datetimestamp = Date.now();
+            cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
+        }
+    });
+
+    var upload = multer({ //multer settings
+        storage: storage
+    }).array('files', 7);
 
     //Auth logic
     /*app.get("/ntlm-auth", passport.authenticate('passport-windowsauth'), function(req, res) {
@@ -24,7 +39,12 @@ module.exports = function(app, passport){
 
     app.get('/logout', helpers.auth.logOut);
 
+    app.post('/upload', upload, helpers.files.upload);
+
+    app.post('/delete', helpers.files.delete);
+
     app.get("/*", helpers.common.generateMainPage);
+
 
     function defineRestResource(modelName){
         var UpperFirstName = _.upperFirst(modelName);

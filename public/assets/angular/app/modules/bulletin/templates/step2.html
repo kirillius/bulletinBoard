@@ -1,0 +1,23 @@
+<div class="container" style="padding-top: 30px">
+    <div class="row">
+        <label>Текст объявления</label>
+        <div class="form-inline row customForm">
+            <textarea class="form-control" form="form-step2" rows="4" cols="60" placeholder="Введите текст объявления" name="comment" ng-model="bulletin.comment"></textarea>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px">
+        <label>Добавление фотографий (макс. кол-во {{maxFiles}})</label>
+        <div>
+            <button type="button" class="btn btn-success" form="form-step2" ngf-multiple="true" ngf-select="fileAdded($files)" ngf-max-files="{{maxFiles}}" ngf-pattern="'.jpg,.png'" accept=".jpg,.png">Загрузить...</button>
+            <div>
+                <span>Фотографии:</span>
+                <ng-image-gallery images="photos" methods="methods" conf="conf" thumbnails="thumbnails" thumb-size="thumbSize" inline="inline" bubbles="bubbles" bubble-size="bubbleSize" img-bubbles="imgBubbles" bg-close="bgClose" piracy="true" on-open="opened();" on-close="closed();" on-delete="delete(img, cb)" bg-close="false"></ng-image-gallery>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <button class="btn btn-success" style="margin-top: 20px" ng-click="saveBulletin()">Отправить объявление</button>
+    </div>
+    </div>
+</div>
