@@ -11,7 +11,8 @@ angular
         'app.main',
         'app.bulletin',
         'ngFileUpload',
-        'thatisuday.ng-image-gallery'
+        'thatisuday.ng-image-gallery',
+        'toastr'
     ])
     .config(['$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', 'AppPaths',
         function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, AppPaths) {
@@ -29,17 +30,17 @@ angular
         }])
     .run(['$rootScope', function($rootScope){
     }]);
-angular
-    .module('app.bulletin', [
-        'ui.router',
-        'app.general'
-    ]);
 
     angular
     .module('app.general', [
     ]);
 angular
     .module('app.main', [
+        'ui.router',
+        'app.general'
+    ]);
+angular
+    .module('app.bulletin', [
         'ui.router',
         'app.general'
     ]);
@@ -181,12 +182,30 @@ angular
 
         return service;
     }]);
+angular.module('app.main')
+    .controller('MainController', ['$scope', '$state', '$http', 'AppPaths', function($scope, $state, $http, AppPaths) {
+    }]);
+angular
+    .module('app.main')
+    .config(['$stateProvider', 'AppPaths', function($stateProvider, AppPaths) {
+
+        $stateProvider
+            .state('app.main', {
+                url: '',
+                controller: 'MainController',
+                templateUrl: AppPaths.main + 'templates/index.html'
+            });
+    }]);
 angular.module('app.bulletin')
-    .controller('BulletinController', ['$scope', '$state', '$http', '$timeout', 'AppPaths', 'rest', 'ParametersByName', 'Parameters', 'Upload', function($scope, $state, $http, $timeout, AppPaths, rest, ParametersByName, Parameters, Upload) {
+    .controller('BulletinController', ['$scope', '$state', '$http', '$timeout', 'AppPaths', 'rest', 'ParametersByName', 'Parameters', 'Upload', 'toastr', 'toastrConfig',function($scope, $state, $http, $timeout, AppPaths, rest, ParametersByName, Parameters, Upload, toastr, toastrConfig) {
 
         $scope.bulletin = {
             sale: 0
         };
+
+        angular.extend(toastrConfig, {
+            positionClass: 'toast-bottom-right'
+        });
 
         $scope.parametersList = {};
         $scope.getTypes = function() {
@@ -224,10 +243,25 @@ angular.module('app.bulletin')
             for (var num in $scope.photos)
                 photoIdObj.push($scope.photos[num].id);
 
-            newObj['oomment'] = $scope.bulletin.comment;
+            newObj['comment'] = $scope.bulletin.comment;
             newObj['photos'] = photoIdObj;
 
             localStorage.setItem('userBulletin', JSON.stringify(newObj));
+
+            $http({
+                url: '/saveBulletin',
+                method: "POST",
+                data: {newObj}
+            })
+                .then(function (response) {
+                    console.log(response);
+                    $state.go('app.mainPage');
+                    toastr.success('Объявление успешно добавлено');
+                }, function (response) {
+                    console.log('err', response)
+                    $state.go('app.bulletin');
+                    toastr.error('Объявление не может быть добавлено');
+                })
         };
 
         $scope.choiceCheckboxComfort = function(itemId, value) {
@@ -321,19 +355,9 @@ angular
                 url: 'newBulletin2',
                 controller: 'BulletinController',
                 templateUrl: AppPaths.bulletin + 'templates/step2.html'
-            });
-    }]);
-angular.module('app.main')
-    .controller('MainController', ['$scope', '$state', '$http', 'AppPaths', function($scope, $state, $http, AppPaths) {
-    }]);
-angular
-    .module('app.main')
-    .config(['$stateProvider', 'AppPaths', function($stateProvider, AppPaths) {
-
-        $stateProvider
-            .state('app.main', {
-                url: '',
-                controller: 'MainController',
+            })
+            .state('app.mainPage', {
+                controller: 'BulletinController',
                 templateUrl: AppPaths.main + 'templates/index.html'
             });
     }]);

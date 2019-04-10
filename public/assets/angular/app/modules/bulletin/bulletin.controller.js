@@ -1,9 +1,13 @@
 angular.module('app.bulletin')
-    .controller('BulletinController', ['$scope', '$state', '$http', '$timeout', 'AppPaths', 'rest', 'ParametersByName', 'Parameters', 'Upload', function($scope, $state, $http, $timeout, AppPaths, rest, ParametersByName, Parameters, Upload) {
+    .controller('BulletinController', ['$scope', '$state', '$http', '$timeout', 'AppPaths', 'rest', 'ParametersByName', 'Parameters', 'Upload', 'toastr', 'toastrConfig',function($scope, $state, $http, $timeout, AppPaths, rest, ParametersByName, Parameters, Upload, toastr, toastrConfig) {
 
         $scope.bulletin = {
             sale: 0
         };
+
+        angular.extend(toastrConfig, {
+            positionClass: 'toast-bottom-right'
+        });
 
         $scope.parametersList = {};
         $scope.getTypes = function() {
@@ -41,10 +45,25 @@ angular.module('app.bulletin')
             for (var num in $scope.photos)
                 photoIdObj.push($scope.photos[num].id);
 
-            newObj['oomment'] = $scope.bulletin.comment;
+            newObj['comment'] = $scope.bulletin.comment;
             newObj['photos'] = photoIdObj;
 
             localStorage.setItem('userBulletin', JSON.stringify(newObj));
+
+            $http({
+                url: '/saveBulletin',
+                method: "POST",
+                data: {newObj}
+            })
+                .then(function (response) {
+                    console.log(response);
+                    $state.go('app.mainPage');
+                    toastr.success('Объявление успешно добавлено');
+                }, function (response) {
+                    console.log('err', response)
+                    $state.go('app.bulletin');
+                    toastr.error('Объявление не может быть добавлено');
+                })
         };
 
         $scope.choiceCheckboxComfort = function(itemId, value) {
