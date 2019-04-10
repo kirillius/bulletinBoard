@@ -13,7 +13,8 @@ module.exports = {
         database: {
             user: 'rental',
             password: 'kirillius1991',
-            server: '185.158.153.107'
+            server: '185.158.153.107',
+            name: 'bulletinBoard'
         }
     },
     'development': {
