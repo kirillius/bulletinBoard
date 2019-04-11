@@ -30,6 +30,11 @@ angular
         }])
     .run(['$rootScope', function($rootScope){
     }]);
+angular
+    .module('app.bulletin', [
+        'ui.router',
+        'app.general'
+    ]);
 
     angular
     .module('app.general', [
@@ -39,14 +44,28 @@ angular
         'ui.router',
         'app.general'
     ]);
-angular
-    .module('app.bulletin', [
-        'ui.router',
-        'app.general'
-    ]);
 angular.module('app')
     .controller('AppController', ['$scope', '$rootScope', '$state', '$http', 'AppPaths', function($scope, $rootScope, $state, $http, AppPaths) {
         var self = this;
+    }]);
+angular
+    .module('app')
+    .service('notifications', ['toastr', 'toastrConfig', function (toastr, toastrConfig) {
+        angular.extend(toastrConfig, {
+            positionClass: 'toast-top-right'
+        });
+
+        var service = {
+            success: function() {
+                toastr.success('Объявление успешно добавлено');
+
+            },
+            error: function() {
+                toastr.error('Объявление не может быть добавлено');
+            }
+        };
+
+        return service;
     }]);
 angular
     .module('app')
@@ -182,30 +201,12 @@ angular
 
         return service;
     }]);
-angular.module('app.main')
-    .controller('MainController', ['$scope', '$state', '$http', 'AppPaths', function($scope, $state, $http, AppPaths) {
-    }]);
-angular
-    .module('app.main')
-    .config(['$stateProvider', 'AppPaths', function($stateProvider, AppPaths) {
-
-        $stateProvider
-            .state('app.main', {
-                url: '',
-                controller: 'MainController',
-                templateUrl: AppPaths.main + 'templates/index.html'
-            });
-    }]);
 angular.module('app.bulletin')
-    .controller('BulletinController', ['$scope', '$state', '$http', '$timeout', 'AppPaths', 'rest', 'ParametersByName', 'Parameters', 'Upload', 'toastr', 'toastrConfig',function($scope, $state, $http, $timeout, AppPaths, rest, ParametersByName, Parameters, Upload, toastr, toastrConfig) {
+    .controller('BulletinController', ['$scope', '$state', '$http', '$timeout', 'AppPaths', 'rest', 'ParametersByName', 'Parameters', 'Upload', 'notifications', function($scope, $state, $http, $timeout, AppPaths, rest, ParametersByName, Parameters, Upload, notifications) {
 
         $scope.bulletin = {
             sale: 0
         };
-
-        angular.extend(toastrConfig, {
-            positionClass: 'toast-bottom-right'
-        });
 
         $scope.parametersList = {};
         $scope.getTypes = function() {
@@ -256,11 +257,11 @@ angular.module('app.bulletin')
                 .then(function (response) {
                     console.log(response);
                     $state.go('app.mainPage');
-                    toastr.success('Объявление успешно добавлено');
+                    notifications.success();
                 }, function (response) {
+                    notifications.error();
                     console.log('err', response)
                     $state.go('app.bulletin');
-                    toastr.error('Объявление не может быть добавлено');
                 })
         };
 
@@ -358,6 +359,20 @@ angular
             })
             .state('app.mainPage', {
                 controller: 'BulletinController',
+                templateUrl: AppPaths.main + 'templates/index.html'
+            });
+    }]);
+angular.module('app.main')
+    .controller('MainController', ['$scope', '$state', '$http', 'AppPaths', function($scope, $state, $http, AppPaths) {
+    }]);
+angular
+    .module('app.main')
+    .config(['$stateProvider', 'AppPaths', function($stateProvider, AppPaths) {
+
+        $stateProvider
+            .state('app.main', {
+                url: '',
+                controller: 'MainController',
                 templateUrl: AppPaths.main + 'templates/index.html'
             });
     }]);
