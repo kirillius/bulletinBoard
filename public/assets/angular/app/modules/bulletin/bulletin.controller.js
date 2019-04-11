@@ -56,9 +56,9 @@ angular.module('app.bulletin')
                     $state.go('app.mainPage');
                     notifications.success();
                 }, function (response) {
-                    notifications.error();
                     console.log('err', response)
                     $state.go('app.bulletin');
+                    notifications.error();
                 })
         };
 
