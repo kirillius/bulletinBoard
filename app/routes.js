@@ -43,6 +43,8 @@ module.exports = function(app, passport){
 
     app.post('/delete', helpers.files.delete);
 
+    app.post('/saveBulletin', controllers.bulletin.saveBulletin);
+
     app.get("/*", helpers.common.generateMainPage);
 
 

@@ -12,5 +12,9 @@ angular
                 url: 'newBulletin2',
                 controller: 'BulletinController',
                 templateUrl: AppPaths.bulletin + 'templates/step2.html'
+            })
+            .state('app.mainPage', {
+                controller: 'BulletinController',
+                templateUrl: AppPaths.main + 'templates/index.html'
             });
     }]);

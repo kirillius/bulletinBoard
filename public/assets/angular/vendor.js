@@ -13,3 +13,4 @@ require('angular-ui-bootstrap');
 require('ui-select');
 require('ng-file-upload');
 require('ng-image-gallery');
+require('angular-toastr');

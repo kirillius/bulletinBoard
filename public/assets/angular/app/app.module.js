@@ -11,7 +11,8 @@ angular
         'app.main',
         'app.bulletin',
         'ngFileUpload',
-        'thatisuday.ng-image-gallery'
+        'thatisuday.ng-image-gallery',
+        'toastr'
     ])
     .config(['$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', 'AppPaths',
         function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, AppPaths) {
