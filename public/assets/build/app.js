@@ -30,17 +30,17 @@ angular
         }])
     .run(['$rootScope', function($rootScope){
     }]);
+angular
+    .module('app.bulletin', [
+        'ui.router',
+        'app.general'
+    ]);
 
     angular
     .module('app.general', [
     ]);
 angular
     .module('app.main', [
-        'ui.router',
-        'app.general'
-    ]);
-angular
-    .module('app.bulletin', [
         'ui.router',
         'app.general'
     ]);
@@ -181,20 +181,6 @@ angular
         };
 
         return service;
-    }]);
-angular.module('app.main')
-    .controller('MainController', ['$scope', '$state', '$http', 'AppPaths', function($scope, $state, $http, AppPaths) {
-    }]);
-angular
-    .module('app.main')
-    .config(['$stateProvider', 'AppPaths', function($stateProvider, AppPaths) {
-
-        $stateProvider
-            .state('app.main', {
-                url: '',
-                controller: 'MainController',
-                templateUrl: AppPaths.main + 'templates/index.html'
-            });
     }]);
 angular.module('app.bulletin')
     .controller('BulletinController', ['$scope', '$state', '$http', '$timeout', 'AppPaths', 'rest', 'ParametersByName', 'Parameters', 'Upload', 'toastr', 'toastrConfig',function($scope, $state, $http, $timeout, AppPaths, rest, ParametersByName, Parameters, Upload, toastr, toastrConfig) {
@@ -358,6 +344,20 @@ angular
             })
             .state('app.mainPage', {
                 controller: 'BulletinController',
+                templateUrl: AppPaths.main + 'templates/index.html'
+            });
+    }]);
+angular.module('app.main')
+    .controller('MainController', ['$scope', '$state', '$http', 'AppPaths', function($scope, $state, $http, AppPaths) {
+    }]);
+angular
+    .module('app.main')
+    .config(['$stateProvider', 'AppPaths', function($stateProvider, AppPaths) {
+
+        $stateProvider
+            .state('app.main', {
+                url: '',
+                controller: 'MainController',
                 templateUrl: AppPaths.main + 'templates/index.html'
             });
     }]);
