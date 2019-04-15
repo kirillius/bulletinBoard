@@ -35,14 +35,14 @@ angular
         'ui.router',
         'app.general'
     ]);
+
+    angular
+    .module('app.general', [
+    ]);
 angular
     .module('app.main', [
         'ui.router',
         'app.general'
-    ]);
-
-    angular
-    .module('app.general', [
     ]);
 angular.module('app')
     .controller('AppController', ['$scope', '$rootScope', '$state', '$http', 'AppPaths', function($scope, $rootScope, $state, $http, AppPaths) {
