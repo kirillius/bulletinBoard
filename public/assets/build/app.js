@@ -11,7 +11,8 @@ angular
         'app.main',
         'app.bulletin',
         'ngFileUpload',
-        'thatisuday.ng-image-gallery'
+        'thatisuday.ng-image-gallery',
+        'toastr'
     ])
     .config(['$urlRouterProvider', '$stateProvider', '$locationProvider', '$httpProvider', 'AppPaths',
         function($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, AppPaths) {
@@ -46,6 +47,25 @@ angular
 angular.module('app')
     .controller('AppController', ['$scope', '$rootScope', '$state', '$http', 'AppPaths', function($scope, $rootScope, $state, $http, AppPaths) {
         var self = this;
+    }]);
+angular
+    .module('app')
+    .service('notifications', ['toastr', 'toastrConfig', function (toastr, toastrConfig) {
+        angular.extend(toastrConfig, {
+            positionClass: 'toast-top-right'
+        });
+
+        var service = {
+            success: function() {
+                toastr.success('Объявление успешно добавлено');
+
+            },
+            error: function() {
+                toastr.error('Объявление не может быть добавлено');
+            }
+        };
+
+        return service;
     }]);
 angular
     .module('app')
@@ -182,7 +202,7 @@ angular
         return service;
     }]);
 angular.module('app.bulletin')
-    .controller('BulletinController', ['$scope', '$state', '$http', '$timeout', 'AppPaths', 'rest', 'ParametersByName', 'Parameters', 'Upload', function($scope, $state, $http, $timeout, AppPaths, rest, ParametersByName, Parameters, Upload) {
+    .controller('BulletinController', ['$scope', '$state', '$http', '$timeout', 'AppPaths', 'rest', 'ParametersByName', 'Parameters', 'Upload', 'notifications', function($scope, $state, $http, $timeout, AppPaths, rest, ParametersByName, Parameters, Upload, notifications) {
 
         $scope.bulletin = {
             sale: 0
@@ -224,10 +244,25 @@ angular.module('app.bulletin')
             for (var num in $scope.photos)
                 photoIdObj.push($scope.photos[num].id);
 
-            newObj['oomment'] = $scope.bulletin.comment;
+            newObj['comment'] = $scope.bulletin.comment;
             newObj['photos'] = photoIdObj;
 
             localStorage.setItem('userBulletin', JSON.stringify(newObj));
+
+            $http({
+                url: '/saveBulletin',
+                method: "POST",
+                data: {newObj}
+            })
+                .then(function (response) {
+                    console.log(response);
+                    $state.go('app.mainPage');
+                    notifications.success();
+                }, function (response) {
+                    console.log('err', response)
+                    $state.go('app.bulletin');
+                    notifications.error();
+                })
         };
 
         $scope.choiceCheckboxComfort = function(itemId, value) {
@@ -321,6 +356,10 @@ angular
                 url: 'newBulletin2',
                 controller: 'BulletinController',
                 templateUrl: AppPaths.bulletin + 'templates/step2.html'
+            })
+            .state('app.mainPage', {
+                controller: 'BulletinController',
+                templateUrl: AppPaths.main + 'templates/index.html'
             });
     }]);
 angular.module('app.main')

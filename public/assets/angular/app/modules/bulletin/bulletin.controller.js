@@ -1,5 +1,5 @@
 angular.module('app.bulletin')
-    .controller('BulletinController', ['$scope', '$state', '$http', '$timeout', 'AppPaths', 'rest', 'ParametersByName', 'Parameters', 'Upload', function($scope, $state, $http, $timeout, AppPaths, rest, ParametersByName, Parameters, Upload) {
+    .controller('BulletinController', ['$scope', '$state', '$http', '$timeout', 'AppPaths', 'rest', 'ParametersByName', 'Parameters', 'Upload', 'notifications', function($scope, $state, $http, $timeout, AppPaths, rest, ParametersByName, Parameters, Upload, notifications) {
 
         $scope.bulletin = {
             sale: 0
@@ -41,10 +41,25 @@ angular.module('app.bulletin')
             for (var num in $scope.photos)
                 photoIdObj.push($scope.photos[num].id);
 
-            newObj['oomment'] = $scope.bulletin.comment;
+            newObj['comment'] = $scope.bulletin.comment;
             newObj['photos'] = photoIdObj;
 
             localStorage.setItem('userBulletin', JSON.stringify(newObj));
+
+            $http({
+                url: '/saveBulletin',
+                method: "POST",
+                data: {newObj}
+            })
+                .then(function (response) {
+                    console.log(response);
+                    $state.go('app.mainPage');
+                    notifications.success();
+                }, function (response) {
+                    console.log('err', response)
+                    $state.go('app.bulletin');
+                    notifications.error();
+                })
         };
 
         $scope.choiceCheckboxComfort = function(itemId, value) {

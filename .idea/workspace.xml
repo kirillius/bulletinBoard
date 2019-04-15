@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d26bad56-95bc-4ee1-ba45-97f2b5a3324e" name="Default Changelist" comment="merge branch Gallery">
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/nodejs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/nodejs.xml" afterDir="false" />
+    <list default="true" id="d26bad56-95bc-4ee1-ba45-97f2b5a3324e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/controllers/bulletin.controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/angular/app/services/notifications.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/helpers/files.helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/helpers/files.helper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/object.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/object.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gulpfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/gulpfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/angular/app/app.module.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/angular/app/app.module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/angular/app/modules/bulletin/bulletin.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/angular/app/modules/bulletin/bulletin.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/angular/app/modules/bulletin/bulletin.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/angular/app/modules/bulletin/bulletin.routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/angular/vendor.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/angular/vendor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/build/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/build/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/assets/build/vendor.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/build/vendor.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/build/vendor.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/build/vendor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/register.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -46,8 +60,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/helpers/files.helper.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="660">
-              <caret line="33" column="14" selection-start-line="33" selection-start-column="14" selection-end-line="33" selection-end-column="14" />
+            <state relative-caret-position="640">
+              <caret line="32" column="14" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -64,8 +78,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="36" column="62" lean-forward="true" selection-start-line="36" selection-start-column="62" selection-end-line="36" selection-end-column="62" />
+            <state relative-caret-position="480">
+              <caret line="52" column="20" lean-forward="true" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -212,6 +226,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -224,11 +239,15 @@
               <item name="bulletinBoard" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="bulletinBoard" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bulletinBoard" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -356,7 +375,8 @@
       <workItem from="1552957068979" duration="22328000" />
       <workItem from="1553228306406" duration="46882000" />
       <workItem from="1553661797766" duration="27505000" />
-      <workItem from="1554871019551" duration="252000" />
+      <workItem from="1554871019551" duration="294000" />
+      <workItem from="1555309994599" duration="287000" />
     </task>
     <task id="LOCAL-00001" summary="create db">
       <created>1542260688345</created>
@@ -379,11 +399,18 @@
       <option name="project" value="LOCAL" />
       <updated>1554871083247</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Собрал gulp и новый конфиг">
+      <created>1554871285723</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1554871285723</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="345421000" />
+    <option name="totallyTimeSpent" value="345750000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -396,7 +423,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4989339" visible="true" weight="0.15519126" />
       <window_info id="Structure" order="1" sideWeight="0.5010661" side_tool="true" weight="0.16302083" />
@@ -405,15 +431,15 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49895832" weight="0.3284055" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6851562" weight="0.27032736" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49791667" visible="true" weight="0.39740822" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49791667" weight="0.39740822" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49947917" weight="0.32942432" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32721382" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.3261339" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.31484374" side_tool="true" weight="0.26892656" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4859375" weight="0.30561554" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.4859375" visible="true" weight="0.30561554" />
       <window_info anchor="bottom" id="File Transfer" order="12" sideWeight="0.49947917" visible="true" weight="0.32943678" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -468,7 +494,8 @@
     <MESSAGE value="create db" />
     <MESSAGE value="Default Changelist" />
     <MESSAGE value="merge branch Gallery" />
-    <option name="LAST_COMMIT_MESSAGE" value="merge branch Gallery" />
+    <MESSAGE value="Собрал gulp и новый конфиг" />
+    <option name="LAST_COMMIT_MESSAGE" value="Собрал gulp и новый конфиг" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/public/assets/css/style.css">
@@ -749,31 +776,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/angular/app/modules/bulletin/bulletin.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="34" column="10" selection-start-line="34" selection-start-column="10" selection-end-line="34" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/helpers/files.helper.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="33" column="14" selection-start-line="33" selection-start-column="14" selection-end-line="33" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gulpfile.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="860">
           <caret line="43" column="20" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="30" column="20" lean-forward="true" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -788,6 +794,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/angular/app/modules/bulletin/bulletin.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="34" column="10" selection-start-line="34" selection-start-column="10" selection-end-line="34" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/helpers/files.helper.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="640">
+          <caret line="32" column="14" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -795,10 +815,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="30" column="20" lean-forward="true" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="36" column="62" lean-forward="true" selection-start-line="36" selection-start-column="62" selection-end-line="36" selection-end-column="62" />
+        <state relative-caret-position="480">
+          <caret line="52" column="20" lean-forward="true" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
         </state>
       </provider>
     </entry>

@@ -24,7 +24,6 @@ module.exports = {
             //fs.mkdirSync(pathToFolderEntity);
 
         async.eachOfSeries(req.files, function (fileObject, index, eachCallback) {
-            console.log(req.files);
             var Photos = require('../models').photo;
             var newFile = {
                 name: fileObject.filename,

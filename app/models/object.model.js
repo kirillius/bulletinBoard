@@ -10,9 +10,6 @@ module.exports = function (sequelize, options, callback) {
             description: {
                 type: Sequelize.TEXT
             },
-            countRooms: {
-                type: Sequelize.INTEGER
-            },
             mainArea: {
                 type: Sequelize.FLOAT
             },
@@ -26,7 +23,7 @@ module.exports = function (sequelize, options, callback) {
                 type: Sequelize.INTEGER
             },
             adr: {
-                type: Sequelize.INTEGER
+                type: Sequelize.STRING
             },
             sale: {
                 type: Sequelize.BOOLEAN
