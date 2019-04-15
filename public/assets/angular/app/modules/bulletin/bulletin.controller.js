@@ -54,11 +54,11 @@ angular.module('app.bulletin')
                 .then(function (response) {
                     console.log(response);
                     $state.go('app.mainPage');
-                    notifications.success();
+                    notifications.success('Объявление успешно добавлено');
                 }, function (response) {
                     console.log('err', response)
                     $state.go('app.bulletin');
-                    notifications.error();
+                    notifications.error('Объявление не может быть добавлено');
                 })
         };
 

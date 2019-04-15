@@ -35,14 +35,14 @@ angular
         'ui.router',
         'app.general'
     ]);
-
-    angular
-    .module('app.general', [
-    ]);
 angular
     .module('app.main', [
         'ui.router',
         'app.general'
+    ]);
+
+    angular
+    .module('app.general', [
     ]);
 angular.module('app')
     .controller('AppController', ['$scope', '$rootScope', '$state', '$http', 'AppPaths', function($scope, $rootScope, $state, $http, AppPaths) {
@@ -56,12 +56,11 @@ angular
         });
 
         var service = {
-            success: function() {
-                toastr.success('Объявление успешно добавлено');
-
+            success: function(text) {
+                toastr.success(text);
             },
-            error: function() {
-                toastr.error('Объявление не может быть добавлено');
+            error: function(text) {
+                toastr.error(text);
             }
         };
 
@@ -257,11 +256,11 @@ angular.module('app.bulletin')
                 .then(function (response) {
                     console.log(response);
                     $state.go('app.mainPage');
-                    notifications.success();
+                    notifications.success('Объявление успешно добавлено');
                 }, function (response) {
-                    notifications.error();
                     console.log('err', response)
                     $state.go('app.bulletin');
+                    notifications.error('Объявление не может быть добавлено');
                 })
         };
 

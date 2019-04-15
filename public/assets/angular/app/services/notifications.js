@@ -6,12 +6,11 @@ angular
         });
 
         var service = {
-            success: function() {
-                toastr.success('Объявление успешно добавлено');
-
+            success: function(text) {
+                toastr.success(text);
             },
-            error: function() {
-                toastr.error('Объявление не может быть добавлено');
+            error: function(text) {
+                toastr.error(text);
             }
         };
 
