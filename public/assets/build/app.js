@@ -50,6 +50,25 @@ angular.module('app')
     }]);
 angular
     .module('app')
+    .service('notifications', ['toastr', 'toastrConfig', function (toastr, toastrConfig) {
+        angular.extend(toastrConfig, {
+            positionClass: 'toast-top-right'
+        });
+
+        var service = {
+            success: function() {
+                toastr.success('Объявление успешно добавлено');
+
+            },
+            error: function() {
+                toastr.error('Объявление не может быть добавлено');
+            }
+        };
+
+        return service;
+    }]);
+angular
+    .module('app')
     .service('ParametersByName', ['Parameters', function(Parameters){
         let self = this;
 
@@ -183,15 +202,11 @@ angular
         return service;
     }]);
 angular.module('app.bulletin')
-    .controller('BulletinController', ['$scope', '$state', '$http', '$timeout', 'AppPaths', 'rest', 'ParametersByName', 'Parameters', 'Upload', 'toastr', 'toastrConfig',function($scope, $state, $http, $timeout, AppPaths, rest, ParametersByName, Parameters, Upload, toastr, toastrConfig) {
+    .controller('BulletinController', ['$scope', '$state', '$http', '$timeout', 'AppPaths', 'rest', 'ParametersByName', 'Parameters', 'Upload', 'notifications', function($scope, $state, $http, $timeout, AppPaths, rest, ParametersByName, Parameters, Upload, notifications) {
 
         $scope.bulletin = {
             sale: 0
         };
-
-        angular.extend(toastrConfig, {
-            positionClass: 'toast-bottom-right'
-        });
 
         $scope.parametersList = {};
         $scope.getTypes = function() {
@@ -242,11 +257,11 @@ angular.module('app.bulletin')
                 .then(function (response) {
                     console.log(response);
                     $state.go('app.mainPage');
-                    toastr.success('Объявление успешно добавлено');
+                    notifications.success();
                 }, function (response) {
                     console.log('err', response)
                     $state.go('app.bulletin');
-                    toastr.error('Объявление не может быть добавлено');
+                    notifications.error();
                 })
         };
 
