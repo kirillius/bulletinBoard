@@ -45,6 +45,8 @@ module.exports = function(app, passport){
 
     app.post('/saveBulletin', controllers.bulletin.saveBulletin);
 
+    app.post('/search', helpers.search.searchStreet);
+
     app.get("/*", helpers.common.generateMainPage);
 
 

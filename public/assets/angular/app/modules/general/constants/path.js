@@ -7,5 +7,5 @@ angular.module('app.general')
         modules:        modules_path,
         main:      modules_path + 'main/',
         bulletin:      modules_path + 'bulletin/',
-        login:      modules_path + 'login/'
+        searchResult:      modules_path + 'searchResult/'
     });

@@ -10,6 +10,7 @@ angular
         'app.general',
         'app.main',
         'app.bulletin',
+        'app.searchResult',
         'ngFileUpload',
         'thatisuday.ng-image-gallery',
         'toastr'
@@ -41,6 +42,11 @@ angular
     ]);
 angular
     .module('app.main', [
+        'ui.router',
+        'app.general'
+    ]);
+angular
+    .module('app.searchResult', [
         'ui.router',
         'app.general'
     ]);
@@ -357,12 +363,17 @@ angular
                 templateUrl: AppPaths.bulletin + 'templates/step2.html'
             })
             .state('app.mainPage', {
-                controller: 'BulletinController',
+                controller: 'MainController',
                 templateUrl: AppPaths.main + 'templates/index.html'
             });
     }]);
 angular.module('app.main')
     .controller('MainController', ['$scope', '$state', '$http', 'AppPaths', function($scope, $state, $http, AppPaths) {
+        $scope.data = {};
+
+        $scope.searchBtn = function() {
+            $state.go('app.searchResult', {adr: $scope.data.adr});
+        }
     }]);
 angular
     .module('app.main')
@@ -375,6 +386,55 @@ angular
                 templateUrl: AppPaths.main + 'templates/index.html'
             });
     }]);
+angular.module('app.searchResult')
+    .controller('SearchResultController', ['$scope', '$state', '$http', 'AppPaths', function($scope, $state, $http, AppPaths) {
+
+        $scope.searchPar = {};
+
+        $scope.search = function(sale, adr, typeObj, typeSale, countRooms) {
+            $scope.searchPar.sale = sale;
+            $scope.searchPar.adr = adr;
+            $scope.searchPar.typeObj = typeObj;
+            $scope.searchPar.typeSale = typeSale;
+            $scope.searchPar.countRooms = countRooms;
+            console.log($scope.searchPar);
+            $scope.search2($scope.searchPar);
+        };
+
+        $scope.search2 = function(searchPar) {//, typeObject, typeSale, countRooms) {
+            var doc = document.getElementById('notFound');
+
+            $http({
+                url: '/search',
+                method: "POST",
+                data: searchPar
+            })
+                .then(function (res) {
+                    $scope.result = res.data;
+                    console.log('SearchResult: ', $scope.result);
+                    doc.innerText = '';
+                }, function (err) { // bulletins not found
+                    console.log(err.data);
+                    $scope.result = null;
+                    doc.innerText = 'Объявлений не найдено';
+                })
+        };
+
+        $scope.search2($state.params);
+
+    }]);
+angular
+    .module('app.searchResult')
+    .config(['$stateProvider', 'AppPaths', function($stateProvider, AppPaths) {
+
+        $stateProvider
+            .state('app.searchResult', {
+                url: 'search',
+                controller: 'SearchResultController',
+                templateUrl: AppPaths.searchResult + 'templates/index.html',
+                params: {adr: null}
+            })
+    }]);
 var app_path = 'assets/angular/app/',
     modules_path = app_path + 'modules/';
 
@@ -384,5 +444,5 @@ angular.module('app.general')
         modules:        modules_path,
         main:      modules_path + 'main/',
         bulletin:      modules_path + 'bulletin/',
-        login:      modules_path + 'login/'
+        searchResult:      modules_path + 'searchResult/'
     });

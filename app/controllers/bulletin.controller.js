@@ -26,6 +26,7 @@ module.exports = function(sequelize) {
             })
             .then(function (object) {
                 res.status(200).json('Объявлено создано успешно');
+                console.log(object);
                 console.log('Объявление создано успешно_1')
                 req.body.newObj.photos.forEach(function(photo) {
                     PhotoObject.create({

@@ -32,7 +32,7 @@ module.exports = {
                 //ownerId: req.body.id
             };
 
-            Photos.create({name: fileObject.filename, path: fileObject.path})
+            Photos.create({name: fileObject.filename, path: newFile.fullPath})
                 .then(function(photo) {
                     newFile.id = photo.id;
                     addFileToResponse(newFile);

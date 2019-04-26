@@ -10,6 +10,7 @@ angular
         'app.general',
         'app.main',
         'app.bulletin',
+        'app.searchResult',
         'ngFileUpload',
         'thatisuday.ng-image-gallery',
         'toastr'

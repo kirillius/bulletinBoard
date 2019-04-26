@@ -14,7 +14,7 @@ angular
                 templateUrl: AppPaths.bulletin + 'templates/step2.html'
             })
             .state('app.mainPage', {
-                controller: 'BulletinController',
+                controller: 'MainController',
                 templateUrl: AppPaths.main + 'templates/index.html'
             });
     }]);
