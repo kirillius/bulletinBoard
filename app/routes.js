@@ -49,7 +49,6 @@ module.exports = function(app, passport){
 
     app.get("/*", helpers.common.generateMainPage);
 
-
     function defineRestResource(modelName){
         var UpperFirstName = _.upperFirst(modelName);
 
