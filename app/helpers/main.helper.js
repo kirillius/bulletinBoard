@@ -9,7 +9,7 @@ module.exports = {
     getCountObjects: function (req, res) {
 
         var roomNames = [
-            {nameVar: 'oneRoom', nameStr: '1'},
+            {nameVar: 'oneRooms', nameStr: '1'},
             {nameVar: 'twoRooms', nameStr: '2'},
             {nameVar: 'threeRooms', nameStr: '3'},
             {nameVar: 'studioRooms', nameStr: 'Студия'}
@@ -17,14 +17,14 @@ module.exports = {
 
         var objCount = {
             purchase: {
-                oneRoom: {name: '1', count: 0},
+                oneRooms: {name: '1', count: 0},
                 twoRooms: {name: '2', count: 0},
                 threeRooms: {name: '3', count: 0},
                 studioRooms: {name: 'Студия', count: 0},
                 apartRooms: {name: 'Комнаты в квартире', count: 0}
             },
             rent: {
-                oneRoom: {name: '1', count: 0},
+                oneRooms: {name: '1', count: 0},
                 twoRooms: {name: '2', count: 0},
                 threeRooms: {name: '3', count: 0},
                 studioRooms: {name: 'Студия', count: 0},

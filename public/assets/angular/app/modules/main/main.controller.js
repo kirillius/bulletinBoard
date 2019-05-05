@@ -8,7 +8,6 @@ angular.module('app.main')
         };
 
         $scope.calculateObjCount = function() {
-            console.log($scope.objCount);
             $http({
                 url: '/getObjects',
                 method: 'POST'
