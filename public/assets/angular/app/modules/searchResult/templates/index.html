@@ -1,5 +1,5 @@
 <div style="background-color: lightcyan; padding: 7px 5px;">
-    <div ng-controller="BulletinController" class="row" style="margin: auto;">
+    <form ng-submit="search(bulletin.sale, adr, bulletin.typeId, bulletin.typeSale, bulletin.countRooms)" ng-controller="BulletinController" class="row" style="margin: auto;">
         <div class="row" style="margin: 3px 0;">
             <div class="custom-control custom-radio col-md-2">
                 <input ng-value="0" ng-model="bulletin.sale" type="radio" class="custom-control-input" id="sale" name="eventBulletin">
@@ -38,7 +38,7 @@
         <div class="col-md-1 padLeft">
         <button ng-click="search(bulletin.sale, adr, bulletin.typeId, bulletin.typeSale, bulletin.countRooms)" class="btn btn-success">Поиск</button>
         </div>
-    </div>
+    </form>
 </div>
 <div style="margin: 0 auto; text-align: center; padding: 10px; margin-bottom: -20px;">
     <span class="title">Результаты поиска</span>

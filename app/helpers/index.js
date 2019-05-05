@@ -3,4 +3,5 @@ module.exports = {
     auth: require('./auth.helper.js'),
     files: require('./files.helper.js'),
     search: require('./search.helper.js'),
+    main: require('./main.helper.js'),
 };

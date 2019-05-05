@@ -47,6 +47,8 @@ module.exports = function(app, passport){
 
     app.post('/search', helpers.search.searchStreet);
 
+    app.post('/getObjects', helpers.main.getCountObjects);
+
     app.get("/*", helpers.common.generateMainPage);
 
     function defineRestResource(modelName){

@@ -2,6 +2,7 @@ angular.module('app.searchResult')
     .controller('SearchResultController', ['$scope', '$state', '$http', 'AppPaths', function($scope, $state, $http, AppPaths) {
 
         $scope.searchPar = {};
+        $scope.adr = $state.params.adr;
 
         $scope.search = function(sale, adr, typeObj, typeSale, countRooms) {
             $scope.searchPar.sale = sale;
@@ -13,7 +14,7 @@ angular.module('app.searchResult')
             $scope.search2($scope.searchPar);
         };
 
-        $scope.search2 = function(searchPar) {//, typeObject, typeSale, countRooms) {
+        $scope.search2 = function(searchPar) {
             var doc = document.getElementById('notFound');
 
             $http({
@@ -33,5 +34,4 @@ angular.module('app.searchResult')
         };
 
         $scope.search2($state.params);
-
     }]);

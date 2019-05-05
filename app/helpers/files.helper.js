@@ -68,4 +68,4 @@ module.exports = {
         //Photos.destroy({where: {id: req.body.id}});
         //Photos.destroy({where: {id: {$in: req.body.photos.id}}});
     }
-}
+};
