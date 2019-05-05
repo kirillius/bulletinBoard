@@ -2,10 +2,7 @@ angular.module('app.main')
     .controller('MainController', ['$scope', '$state', '$http', 'AppPaths', function($scope, $state, $http, AppPaths) {
         $scope.data = {};
 
-        $scope.objCount = {
-            /*purchase: {oneRooms: 1, twoRooms: 2, threeRooms: 3, studioRooms: null, apartRooms: null},
-            rent: {oneRooms: 4, twoRooms: 5, threeRooms: 6, studioRooms: null, apartRooms: null, dailyRoom: null}*/
-        };
+        $scope.objCount = {};
 
         $scope.calculateObjCount = function() {
             $http({
