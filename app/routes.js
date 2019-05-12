@@ -49,6 +49,8 @@ module.exports = function(app, passport){
 
     app.post('/getObjects', helpers.main.getCountObjects);
 
+    app.post('/roomCountId', helpers.search.findRoomCountId);
+
     app.get("/*", helpers.common.generateMainPage);
 
     function defineRestResource(modelName){

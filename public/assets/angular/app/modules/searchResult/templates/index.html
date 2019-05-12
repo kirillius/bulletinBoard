@@ -1,22 +1,22 @@
 <div style="background-color: lightcyan; padding: 7px 5px;">
-    <form ng-submit="search(bulletin.sale, adr, bulletin.typeId, bulletin.typeSale, bulletin.countRooms)" ng-controller="BulletinController" class="row" style="margin: auto;">
+    <form ng-submit="search(sale, adr, searchPar.typeId, searchPar.typeSale, searchPar.countRooms)" class="row" style="margin: auto;">
         <div class="row" style="margin: 3px 0;">
             <div class="custom-control custom-radio col-md-2">
-                <input ng-value="0" ng-model="bulletin.sale" type="radio" class="custom-control-input" id="sale" name="eventBulletin">
+                <input ng-value="0" ng-model="sale" type="radio" class="custom-control-input" id="sale" name="eventBulletin">
                 <label class="custom-control-label" for="sale">Продать квартиру</label>
             </div>
             <div class="custom-control custom-radio col-md-5">
-                <input ng-value="1" ng-model="bulletin.sale" type="radio" class="custom-control-input" id="rent" name="eventBulletin">
+                <input ng-value="1" ng-model="sale" type="radio" class="custom-control-input" id="rent" name="eventBulletin">
                 <label class="custom-control-label" for="rent">Сдать квартиру в аренду</label>
             </div>
         </div>
-        <ui-select ng-model="bulletin.typeId" theme="bootstrap" class="col-md-3 padLeft" style="width: auto;">
+        <ui-select ng-model="searchPar.typeId" theme="bootstrap" class="col-md-3 padLeft" style="width: auto;">
             <ui-select-match placeholder="Выберите тип объекта">{{$select.selected.name}}</ui-select-match>
             <ui-select-choices repeat="type.id as type in types">
                 <div ng-bind-html="type.name"></div>
             </ui-select-choices>
         </ui-select>
-        <ui-select ng-model="bulletin.typeSale" theme="bootstrap" class="col-md-3 padLeft" style="width: auto">
+        <ui-select ng-model="searchPar.typeSale" theme="bootstrap" class="col-md-3 padLeft" style="width: auto">
             <ui-select-match placeholder="Выберите тип продажи">{{$select.selected.name}}</ui-select-match>
             <ui-select-choices repeat="item.id as item in parametersList.typeSale"
                                refresh="loadItemsSelect(ParametersByName.typeSale.id, 'typeSale')"
@@ -24,7 +24,7 @@
                 <div ng-bind-html="item.name"></div>
             </ui-select-choices>
         </ui-select>
-        <ui-select ng-model="bulletin.countRooms" theme="bootstrap" class="col-md-3 padLeft" style="width: auto">
+        <ui-select ng-model="searchPar.countRooms" theme="bootstrap" class="col-md-3 padLeft" style="width: auto">
             <ui-select-match placeholder="Число комнат">{{$select.selected.name}}</ui-select-match>
             <ui-select-choices repeat="item.id as item in parametersList.countRooms track by $index"
                                refresh="loadItemsSelect(ParametersByName.countRooms.id, 'countRooms')"
@@ -36,7 +36,7 @@
             <input ng-model="adr" class="form-control" placeholder="Адрес"></input>
         </div>
         <div class="col-md-1 padLeft">
-        <button ng-click="search(bulletin.sale, adr, bulletin.typeId, bulletin.typeSale, bulletin.countRooms)" class="btn btn-success">Поиск</button>
+        <button type="submit" class="btn btn-success">Поиск</button>
         </div>
     </form>
 </div>

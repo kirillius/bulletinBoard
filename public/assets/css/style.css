@@ -49,7 +49,7 @@ body > .container {
 
 .blockInMain:hover {
     background: #2eb92e; /* Цвет фона под ссылкой */
-    color: #fff; /* Цвет ссылки */
+    color: #fff /* Цвет ссылки */
 }
 /*input { width: 500px !important; } */
 
@@ -98,4 +98,8 @@ div.form-inline div {
 .title {
     font-size: 20px;
     font-weight: bold;
+}
+
+li:hover {
+    color: yellow;
 }

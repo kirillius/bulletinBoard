@@ -7,6 +7,6 @@ angular
                 url: 'search',
                 controller: 'SearchResultController',
                 templateUrl: AppPaths.searchResult + 'templates/index.html',
-                params: {adr: null}
+                params: {adr: null, sale: null, countRoomsId: null, typeObj: null}
             })
     }]);

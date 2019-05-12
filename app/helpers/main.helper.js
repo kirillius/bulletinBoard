@@ -32,21 +32,21 @@ module.exports = {
             }
         };
 
-        function getObjByName(roomName, roomVar, callback) { // поиск объекта по названию количества комнат: от 1 до 9, "10 и более" и "студия"
+        function getObjByName(roomName, roomVar, callback) { // поиск объекта по названию количества комнат
             ParametersValue.findOne({where: {name: roomName}})
                 .then(function (value) {
                     ParametersObject.findAll({where: {parameterValueId: value.id}})
-                        .then(function (objPars) {
+                        .then(function (objPars) { // считаем количество объектов по количеству комнат
                             async.each(objPars, function (objPar, eachcallback) {
                                 Object.findOne({where: {id: objPar.objectId}})
                                     .then(function (obj) {
-                                        if (obj.sale) objCount.purchase[roomVar].count++;
-                                        else objCount.rent[roomVar].count++;
+                                        if (obj.sale) objCount.rent[roomVar].count++;
+                                        else objCount.purchase[roomVar].count++;
                                         eachcallback();
                                     });
                             }, function () {
                                 callback();
-                            });
+                            })
                         });
                 });
         }
@@ -55,13 +55,13 @@ module.exports = {
             Type.findOne({where: {name: 'Комната'}})
                 .then(function (el) {
                     Object.findAll({where: {typeId: el.id}})
-                        .then(function (objects) {
-                            async .each(objects, function (obj, eachcallback) {
-                                if (obj.sale) objCount.purchase['apartRooms'].count++;
-                                else objCount.rent['apartRooms'].count++;
-                               eachcallback();
+                        .then(function (objects) { // считаем количество объектов-"комнат в квартире"
+                            async.each(objects, function (obj, eachcallback) {
+                                if (obj.sale) objCount.rent['apartRooms'].count++;
+                                else objCount.purchase['apartRooms'].count++;
+                                eachcallback();
                             }, function () {
-                                    callback();
+                                callback();
                             });
                         })
                 })

@@ -18,6 +18,26 @@ angular.module('app.main')
         $scope.calculateObjCount();
 
         $scope.searchBtn = function() {
-            $state.go('app.searchResult', {adr: $scope.data.adr});
+            $state.go('app.searchResult', $scope.data);
+        };
+
+        $scope.searchSaleOrRent = function(sale) {
+            $scope.data.sale = sale;
+            $state.go('app.searchResult', $scope.data);
+        };
+
+        $scope.searchByRooms = function(sale, countRooms) {
+            $scope.data.sale = sale;
+
+            $http({
+                url: '/roomCountId',
+                method: 'POST',
+                data: {countRooms}
+            })
+                .then(function (res) {
+                    $scope.data.countRoomsId = res.data.countRoomsId;
+                    $scope.data.typeObj = res.data.typeObj;
+                    $state.go('app.searchResult', $scope.data);
+                });
         }
     }]);

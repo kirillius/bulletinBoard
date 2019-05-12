@@ -7,6 +7,7 @@ var PhotoObject = require('../models').photoObject;
 var Photo = require('../models').photo;
 var Types = require('../models').type;
 var ParametersObject = require('../models').parametersObject;
+var ParametersValue = require('../models').parametersValue;
 var Parameters = require('../models').parameters;
 
 module.exports = {
@@ -22,13 +23,15 @@ module.exports = {
             .then(function (bulletins) {
                 if (bulletins.length > 0) {
                     async.each(bulletins, function (bulletin, eachCallback) {
-                        findCountRooms(bulletin.id, function (cb) {
-                            if (req.body.countRooms) {
-                                if (req.body.countRooms === cb) searchResult.push(bulletin.dataValues);
-                            } else {
-                                searchResult.push(bulletin.dataValues);
-                            }
-                            eachCallback();
+                        findTypeSaleByObjectId(bulletin.id, function (callback) {
+                            if ((req.body.typeSale === callback) || (!req.body.typeSale)) {
+                                findCountRooms(bulletin.id, function (cb) {
+                                    if ((req.body.countRoomsId === cb) || (!req.body.countRoomsId)) {
+                                        searchResult.push(bulletin.dataValues);
+                                        eachCallback();
+                                    } else eachCallback();
+                                })
+                            } else eachCallback();
                         })
                     }, function (done) {
                         if (searchResult.length > 0) {
@@ -76,17 +79,48 @@ module.exports = {
                 })
         };
 
-        var findCountRooms = function (id, callback) {
-            Parameters.findOne({where: {name: 'countRooms'}})
-                .then(function (countRoom) {
-                    if (countRoom) {
-                        ParametersObject.findOne({where: {objectId: id, parameterId: countRoom.id}})
-                            .then(function (result) {
-                                if (result) callback(result.parameterValueId);
-                                else callback(null);
-                            })
-                    } else callback(null);
+        var findTypeSaleByObjectId = function (id, callback) {
+            findParameterId('Тип продажи', function (cb) {
+                ParametersObject.findOne({where: {objectId: id, parameterId: cb}})
+                    .then (function (parVal) {
+                        if (parVal) callback(parVal.parameterValueId);
+                        else callback(null);
+                    })
+            })
+        };
+
+        var findParameterId = function (displayName, callback) {
+            Parameters.findOne({where: {displayName: displayName}})
+                .then (function (par) {
+                    callback(par.id);
                 })
         };
+
+        var findCountRooms = function (id, callback) {
+            findParameterId('Число комнат', function (cb) {
+                ParametersObject.findOne({where: {objectId: id, parameterId: cb}})
+                    .then(function (result) {
+                        if (result) callback(result.parameterValueId);
+                        else callback(null);
+                    })
+            })
+        };
+    },
+
+    findRoomCountId: function (req, res) {
+        if (req.body.countRooms === 'Комната') {
+            Types.findOne({where: {name: req.body.countRooms}})
+                .then (function (type) {
+                    res.status(200).json({typeObj: type.id});
+                })
+        } else {
+            Parameters.findOne({where: {displayName: 'Число комнат'}})
+                .then (function (par) {
+                    ParametersValue.findOne({where: {parameterId: 2, name: req.body.countRooms}})
+                        .then (function (parVal) {
+                            res.status(200).json({countRoomsId: parVal.id});
+                        })
+                });
+        }
     }
 };

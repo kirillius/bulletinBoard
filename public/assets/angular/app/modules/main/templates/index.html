@@ -8,7 +8,7 @@
                         <input type="hidden" name="search_param" value="all" id="search_param">
                         <input type="text" ng-model="data.adr" class="form-control" name="x" placeholder="Район, улица, остановка">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" ng-click="searchBtn()"><span class="glyphicon glyphicon-search"></span></button>
+                            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                         </span>
                     </form>
                 </div>
@@ -18,27 +18,27 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-md-5 blockInMain">
+        <div class="col-md-5 blockInMain" ng-click="searchSaleOrRent(0)">
             <h4>Купить квартиру в Хабаровске</h4>
             <ul class="mainUL col-md-7">
-                <li>1-комнатные {{objCount.purchase.oneRooms.count}}</li>
-                <li>2-комнатные {{objCount.purchase.twoRooms.count}}</li>
-                <li>3-комнатные {{objCount.purchase.threeRooms.count}}</li>
-                <li>студии {{objCount.purchase.studioRooms.count}}</li>
-                <li>комнаты в квартире {{objCount.purchase.apartRooms.count}}</li>
+                <li ng-click="searchByRooms(0, '1')">1-комнатные {{objCount.purchase.oneRooms.count}}</li>
+                <li ng-click="searchByRooms(0, '2')">2-комнатные {{objCount.purchase.twoRooms.count}}</li>
+                <li ng-click="searchByRooms(0, '3')">3-комнатные {{objCount.purchase.threeRooms.count}}</li>
+                <li ng-click="searchByRooms(0, 'Студия')">студии {{objCount.purchase.studioRooms.count}}</li>
+                <li ng-click="searchByRooms(0, 'Комната')">комнаты в квартире {{objCount.purchase.apartRooms.count}}</li>
             </ul>
             <div class="col-md-5 text-right">
                 <img src="assets/img/buyAppartament.png" style="width:140px; height: 140px;"/>
             </div>
         </div>
-        <div class="col-md-5 blockInMain">
+        <div class="col-md-5 blockInMain" ng-click="searchSaleOrRent(1)">
             <h4>Снять квартиру в Хабаровске</h4>
             <ul class="mainUL col-md-7">
-                <li>1-комнатные {{objCount.rent.oneRooms.count}}</li>
-                <li>2-комнатные {{objCount.rent.twoRooms.count}}</li>
-                <li>3-комнатные {{objCount.rent.threeRooms.count}}</li>
-                <li>студии {{objCount.rent.studioRooms.count}}</li>
-                <li>комнаты в квартире {{objCount.rent.apartRooms.count}}</li>
+                <li ng-click="searchByRooms(1, '1')">1-комнатные {{objCount.rent.oneRooms.count}}</li>
+                <li ng-click="searchByRooms(1, '2')">2-комнатные {{objCount.rent.twoRooms.count}}</li>
+                <li ng-click="searchByRooms(1, '3')">3-комнатные {{objCount.rent.threeRooms.count}}</li>
+                <li ng-click="searchByRooms(1, 'Студия')">студии {{objCount.rent.studioRooms.count}}</li>
+                <li ng-click="searchByRooms(1, 'Комната')">комнаты в квартире {{objCount.rent.apartRooms.count}}</li>
             </ul>
             <div class="col-md-5 text-right">
                 <img src="assets/img/rentAppartament.png" style="width:140px; height: 140px;"/>
