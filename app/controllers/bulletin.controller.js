@@ -15,6 +15,8 @@ module.exports = function(sequelize) {
                 liveArea: req.body.newObj.liveArea,
                 floor: req.body.newObj.floor,
                 adr: req.body.newObj.adr,
+                name: req.body.newObj.name,
+                phone: req.body.newObj.phone,
                 sale: req.body.newObj.sale,
                 cost: req.body.newObj.cost,
                 penthouse: req.body.newObj.penthouse,

@@ -25,6 +25,12 @@ module.exports = function (sequelize, options, callback) {
             adr: {
                 type: Sequelize.STRING
             },
+            name: {
+                type: Sequelize.STRING
+            },
+            phone: {
+                type: Sequelize.STRING
+            },
             sale: {
                 type: Sequelize.BOOLEAN
             },

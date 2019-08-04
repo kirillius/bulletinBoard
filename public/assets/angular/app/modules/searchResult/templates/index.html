@@ -3,11 +3,11 @@
         <div class="row" style="margin: 3px 0;">
             <div class="custom-control custom-radio col-md-2">
                 <input ng-value="0" ng-model="sale" type="radio" class="custom-control-input" id="sale" name="eventBulletin">
-                <label class="custom-control-label" for="sale">Продать квартиру</label>
+                <label class="custom-control-label" for="sale">Продать</label>
             </div>
             <div class="custom-control custom-radio col-md-5">
                 <input ng-value="1" ng-model="sale" type="radio" class="custom-control-input" id="rent" name="eventBulletin">
-                <label class="custom-control-label" for="rent">Сдать квартиру в аренду</label>
+                <label class="custom-control-label" for="rent">Сдать в аренду</label>
             </div>
         </div>
         <ui-select ng-model="searchPar.typeId" theme="bootstrap" class="col-md-3 padLeft" style="width: auto;">
@@ -43,26 +43,50 @@
 <div style="margin: 0 auto; text-align: center; padding: 10px; margin-bottom: -20px;">
     <span class="title">Результаты поиска</span>
 </div>
-<div class="FIXME">
+<div>
     <div id="notFound" style="margin: 20px 30px; font-size: large;"></div>
-    <div ng-repeat="bulletin in result" class="row bulletins" style="margin: 0 auto; width: 70%; height: 240px; margin-top: 20px; border: black 1px solid;">
-        <div class="col-md-4" style="padding: 0px; height: 100%">
-            <img style="width: 100%; height:100%;" src="{{bulletin.photo}}">
+    <div class="bulletins">
+        <div class="sort" style="text-align: right; margin: 20px auto 5px;">
+            <span>Сортировка</span>
+            <select>
+                <option>Дата (по возрастанию)</option>
+                <option>Дата (по убыванию)</option>
+                <option>Цена (по возрастанию)</option>
+                <option>Цена (по убыванию)</option>
+                <!--<option>Дата (сначала новые)</option>
+                <option>Дата (сначала старые)</option>
+                <option>Цена (сначала дешёвые)</option>
+                <option>Цена (сначала дорогие)</option>-->
+            </select>
         </div>
-        <div class="col-md-5" style="padding: 0 0 0 15px; height: 100%">
-            <div>
-                <h3>{{bulletin.typeObj}}, {{bulletin.mainArea}} м², {{bulletin.floor}} этаж</h3>
+        <div ng-repeat="bulletin in result" class="row bulletin">
+            <div class="col-md-4" style="padding: 0px; height: 100%; border-right: 1px black solid;">
+                <img style="width: 100%; height:100%;" src="{{bulletin.photo}}">
             </div>
-            <div style="margin: 10px 0;">
-                <span>{{bulletin.adr}}</span>
+            <div class="col-md-5" style="padding: 0 0 0 15px; height: 100%">
+                <div>
+                    <h3>{{bulletin.typeObj}}, {{bulletin.mainArea}} м², {{bulletin.floor}} этаж</h3>
+                </div>
+                <div style="margin: 10px 0;">
+                    <span>{{bulletin.adr}}</span>
+                </div>
+                <div style="font-size: 13px; color: #949494; text-align: justify; height: 140px; overflow-y: auto;">
+                    <span>{{bulletin.description}}</span>
+                    <span>{{bulletin.img}}</span>
+                </div>
             </div>
-            <div style="font-size: 13px; color: #949494; text-align: justify; height: 140px; overflow-y: auto;">
-                <span>{{bulletin.description}}</span>
-                <span>{{bulletin.img}}</span>
+            <div class="col-md-3" style="padding-right: 10px; text-align: right; height: 100%">
+                <div style="height: 100%; display: table; width: 100%;">
+                    <div style="display: table-row;">
+                        <h3>{{bulletin.cost_userFormat}}<small><b> руб.</b></small></h3>
+                    </div>
+                    <div style="display: table-cell; vertical-align: bottom; padding-bottom: 5px;">
+                        <span style="font-size:large;display: block;">{{bulletin.name}}</span>
+                        <span style="font-size:medium;display: block;">{{bulletin.phone}}</span>
+                        <span style="margin-top: 15px;color:grey;display: block;">Добавлено: {{bulletin.createdAt}}</span>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-md-3" style="padding-rigt: 10px; text-align: right; height: 100%">
-            <h3>{{bulletin.cost}}<small><b> руб.</b></small></h3>
         </div>
     </div>
 </div>

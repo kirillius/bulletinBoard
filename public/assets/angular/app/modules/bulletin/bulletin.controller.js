@@ -41,6 +41,8 @@ angular.module('app.bulletin')
             for (var num in $scope.photos)
                 photoIdObj.push($scope.photos[num].id);
 
+            newObj['name'] = $scope.bulletin.name;
+            newObj['phone'] = $scope.bulletin.phone;
             newObj['comment'] = $scope.bulletin.comment;
             newObj['photos'] = photoIdObj;
 
@@ -135,7 +137,7 @@ angular.module('app.bulletin')
                 url: '/delete',
                 method: "POST",
                 data: {'photo': img}
-            })
+            });
             cb();
         }
     }]);

@@ -36,7 +36,14 @@ module.exports = {
                     }, function (done) {
                         if (searchResult.length > 0) {
                             async.each(searchResult, function (bulletin, eachCallback) {
-                                bulletin.cost = String(bulletin.cost).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
+                                bulletin.cost_userFormat = String(bulletin.cost).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
+
+                                /*dt = bulletin.createdAt;
+                                dt_day = (dt.getDate() < 10) ? '0' + dt.getDate() : dt.getDate();
+                                dt_month = (dt.getMonth() < 9) ? '0' + (dt.getMonth() + 1) : dt.getMonth() + 1;
+                                //new_dt = dt_day + '.' + dt_month + '.' + dt.getFullYear() + ' ' + dt.toLocaleTimeString().slice(0, -3); // 01.01.2001 20:01
+                                new_dt = dt_day + '.' + dt_month + '.' + dt.getFullYear().toString().slice(-2); // 01.01.01
+                                bulletin.createdAt = new_dt;*/
 
                                 findTypeObject(bulletin.typeId, function (callback) {
                                     bulletin.typeObj = callback;

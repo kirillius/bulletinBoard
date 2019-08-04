@@ -1,7 +1,20 @@
 <div class="container" style="padding-top: 30px">
     <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                <label>Контактные данные</label>
+            </div>
+            <div class="row">
+                <input ng-model="bulletin.name" type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" placeholder="Имя" style="">
+            </div>
+            <div class="row customFormTop">
+                <input ng-model="bulletin.phone" type="text" class="form-control ng-valid ng-dirty ng-valid-parse ng-touched ng-empty" placeholder="Номер телефона" style="">
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px">
         <label>Текст объявления</label>
-        <div class="form-inline row customForm">
+        <div class="form-inline">
             <textarea class="form-control" form="form-step2" rows="4" cols="60" placeholder="Введите текст объявления" name="comment" ng-model="bulletin.comment"></textarea>
         </div>
     </div>
@@ -15,7 +28,6 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         <button class="btn btn-success" style="margin-top: 20px" ng-click="saveBulletin()">Отправить объявление</button>
     </div>

@@ -1,14 +1,14 @@
 <div class="container">
-    <div class="row" style="padding-top: 30px; margin-bottom: 20px;">
+    <div class="row" style="padding-top: 30px;">
         <label>Что Вы хотите сделать?</label>
-        <div class="row" style="margin-bottom: 10px;">
+        <div class="row" style="margin-bottom: 5px;">
             <div class="custom-control custom-radio col-md-2">
                 <input ng-value="0" ng-model="bulletin.sale" type="radio" class="custom-control-input" id="sale" name="eventBulletin">
-                <label class="custom-control-label" for="sale">Продать квартиру</label>
+                <label class="custom-control-label" for="sale">Продать</label>
             </div>
             <div class="custom-control custom-radio col-md-5">
                 <input ng-value="1" ng-model="bulletin.sale" type="radio" class="custom-control-input" id="rent" name="eventBulletin">
-                <label class="custom-control-label" for="rent">Сдать квартиру в аренду</label>
+                <label class="custom-control-label" for="rent">Сдать в аренду</label>
             </div>
         </div>
         <div class="row">
@@ -31,7 +31,7 @@
             </form>
         </div>
     </div>
-    <div class="row">
+    <div class="row customFormTop">
         <input ng-model="bulletin.adr" type="text" class="form-control" name="x" placeholder="Полный адрес, включая номер дома">
     </div>
     <div class="row" style="padding-top: 30px;">
@@ -99,7 +99,7 @@
     </div>
     <div class="row" style="padding-top: 30px;">
         <label>Информация о доме</label>
-        <form class="form-inline customForm row" role="form">
+        <form class="form-inline" role="form">
             <input ng-model="bulletin.yearBuild" type="text" class="form-control col-md-3" placeholder="Год постройки">
         </form>
     </div>

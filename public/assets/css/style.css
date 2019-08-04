@@ -103,3 +103,23 @@ div.form-inline div {
 li:hover {
     color: yellow;
 }
+
+.bulletins {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.bulletin {
+    margin: 20px auto 0;
+    height: 240px;
+    border: black 1px solid;
+}
+
+.bulletin:nth-child(2) {
+    margin-top: 0;
+}
+
+.sort {
+    text-align: right;
+    margin: 20px auto 5px;
+}
