@@ -1,4 +1,7 @@
 <div class="container">
+    {{ ::symbolAppend('objectType', 1) }}
+    {{ symbolAppend('paymentFrequency', 2) }}
+    {{ ::symbolAppend('countRooms', 3) }}
     <div class="row" style="padding-top: 30px;">
         <label>Что Вы хотите сделать?</label>
         <div class="row" style="margin-bottom: 5px;">
@@ -12,14 +15,14 @@
             </div>
         </div>
         <div class="row">
-            <form class="form-inline" role="form">
-                <ui-select ng-model="bulletin.typeId" theme="bootstrap" class="col-md-3" style="width: auto">
+            <form class="form-inline" role="form" name="type_and_cost">
+                <ui-select ng-model="bulletin.typeId" theme="bootstrap" class="col-md-3" id="objectType" style="width: auto;" required>
                     <ui-select-match placeholder="Выберите тип объекта">{{$select.selected.name}}</ui-select-match>
                     <ui-select-choices repeat="type.id as type in types">
                         <div ng-bind-html="type.name"></div>
                     </ui-select-choices>
                 </ui-select>
-                <ui-select ng-model="bulletin.typeSale" theme="bootstrap" class="col-md-3" style="width: auto">
+                <ui-select ng-model="bulletin.typeSale" theme="bootstrap" class="col-md-3" style="width: auto" ng-hide="bulletin.sale">
                     <ui-select-match placeholder="Выберите тип продажи">{{$select.selected.name}}</ui-select-match>
                     <ui-select-choices repeat="item.id as item in parametersList.typeSale"
                                        refresh="loadItemsSelect(ParametersByName.typeSale.id, 'typeSale')"
@@ -27,17 +30,29 @@
                         <div ng-bind-html="item.name"></div>
                     </ui-select-choices>
                 </ui-select>
-                <input ng-model="bulletin.cost" type="text" class="form-control" name="x" placeholder="Стоимость, руб.">
+                <ui-select ng-model="bulletin.paymentFrequency" theme="bootstrap" class="col-md-3" id="paymentFrequency" style="width: auto" ng-if="bulletin.sale" required>
+                    <ui-select-match placeholder="Частота оплаты">{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="item.id as item in parametersList.paymentFrequency"
+                                       refresh="loadItemsSelect(ParametersByName.paymentFrequency.id, 'paymentFrequency')"
+                                       refresh-delay="0">
+                        <div ng-bind-html="item.name"></div>
+                    </ui-select-choices>
+                </ui-select>
+                <input ng-model="bulletin.cost" type="text" class="form-control" name="x" placeholder="Стоимость, руб." required>
+                <span class="symbol-required">*</span>
             </form>
         </div>
     </div>
     <div class="row customFormTop">
-        <input ng-model="bulletin.adr" type="text" class="form-control" name="x" placeholder="Полный адрес, включая номер дома">
+        <form role="form" name="adr">
+            <input ng-model="bulletin.adr" class="form-control" style="width: 70%; display: inline;" name="x" placeholder="Полный адрес, включая номер дома" required>
+            <span class="symbol-required">*</span>
+        </form>
     </div>
     <div class="row" style="padding-top: 30px;">
         <label>Информация о квартире</label>
-        <form class="form-inline row" role="form">
-            <ui-select ng-model="bulletin.countRooms" theme="bootstrap" class="col-md-3" style="width: auto">
+        <form name="countRooms" class="form-inline row" role="form">
+            <ui-select ng-model="bulletin.countRooms" theme="bootstrap" class="col-md-3" id="countRooms" style="width: auto" required>
                 <ui-select-match placeholder="Число комнат">{{$select.selected.name}}</ui-select-match>
                 <ui-select-choices repeat="item.id as item in parametersList.countRooms track by $index"
                                    refresh="loadItemsSelect(ParametersByName.countRooms.id, 'countRooms')"
@@ -109,13 +124,16 @@
             <div class="checkbox col-md-3" ng-repeat="item in parametersList.comfort">
                 <label>
                     <input type="checkbox" ng-value="item.id" ng-model="checkboxComfort"
-                    ng-change="choiceCheckboxComfort(item.id, checkboxComfort)">
+                           ng-change="choiceCheckboxComfort(item.id, checkboxComfort)">
                     {{item.name}}
                 </label>
             </div>
         </form>
     </div>
     <div class="row" style="margin-bottom: 10px;">
-        <button type="button" class="btn btn-success btnNextStep" ng-click="nextStep()">Шаг 2. Объявление и фото</button>
+        <button class="btn btn-success btnNextStep" ng-click="nextStep()"
+                ng-disabled="type_and_cost.$invalid || adr.$invalid || countRooms.$invalid">
+            Шаг 2. Объявление и фото
+        </button>
     </div>
 </div>

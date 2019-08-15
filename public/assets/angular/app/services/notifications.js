@@ -11,6 +11,9 @@ angular
             },
             error: function(text) {
                 toastr.error(text);
+            },
+            warning: function(text) {
+                toastr.warning(text);
             }
         };
 

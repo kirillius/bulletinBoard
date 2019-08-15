@@ -10,3 +10,14 @@
 .center {
     text-align: center;
 }
+
+div.flex {
+    display: flex;
+}
+
+span.symbol-required {
+    font-size: 27px;
+    line-height: 27px;
+    margin-left: 3px;
+    color: red;
+}

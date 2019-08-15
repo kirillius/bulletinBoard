@@ -8,6 +8,15 @@ angular.module('app.searchResult')
         $scope.adr = $state.params.adr;
         $scope.sale = $state.params.sale;
 
+        $scope.sort = "date_asc";
+
+        $scope.sortType = {
+            date_asc: ['createdAt', 'ASC'],
+            date_desc: ['createdAt', 'DESC'],
+            cost_asc: ['cost', 'ASC'],
+            cost_desc: ['cost', 'DESC']
+        };
+
         $scope.parametersList = {};
         $scope.getTypes = function() {
             rest.get('types').then(function(types) {
@@ -24,19 +33,19 @@ angular.module('app.searchResult')
             });
         };
 
-        $scope.search = function(sale, adr, typeObj, typeSale, countRooms) {
+        $scope.search = function(sale, adr, typeObj, typeSale, countRooms, sort) {
             $scope.searchPar.sale = sale;
             $scope.searchPar.adr = adr;
             $scope.searchPar.typeObj = typeObj;
             $scope.searchPar.typeSale = typeSale;
             $scope.searchPar.countRoomsId = countRooms;
-            console.log($scope.searchPar);
+            $scope.searchPar.sortType = {field: $scope.sortType[sort][0], order: $scope.sortType[sort][1]};
+            console.log("Параметры запроса:", $scope.searchPar);
             $scope.search2($scope.searchPar);
         };
 
         $scope.search2 = function(searchPar) {
             var doc = document.getElementById('notFound');
-            var doc2 = document.getElementsByClassName('sort')[0];
 
             $http({
                 url: '/search',
@@ -45,33 +54,12 @@ angular.module('app.searchResult')
             })
                 .then(function (res) {
                     $scope.result = res.data;
-
-                    console.log(res.data);
-                    //$scope.result.sort((a, b) => a.id - b.id);
-                    $scope.result.sort((a, b) => a.cost - b.cost);
-
-//                    $scope.result.sort((a, b) => Number(a.cost.replace(/ /g, '')) - Number(b.cost.replace(/ /g, '')));
-                    console.log(Date.parse($scope.result[3].createdAt));
-
-
                     console.log('SearchResult: ', $scope.result);
                     doc.innerText = '';
-                    doc2.innerHTML = '<span>Sort by...</span>';
                 }, function (err) { // bulletins not found
                     $scope.result = null;
                     doc.innerText = 'Объявлений не найдено';
-                    doc2.innerText = '';
                 })
-        };
-
-        $scope.sortByCost = function(obj, a, b) {
-            obj.sort((a, b) => a.cost - b.cost);
-        };
-
-        $scope.sortByDate = function(obj, a, b) {
-            console.log(Date(obj.createdAt));
-            Date.parse(obj.createdAt)
-            //obj.sort((a, b) => a.)
         };
 
         $scope.search2($state.params);

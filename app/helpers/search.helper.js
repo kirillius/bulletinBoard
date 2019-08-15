@@ -14,13 +14,20 @@ module.exports = {
     searchStreet: function(req, res) {
         var searchPar = {};
         var searchResult = [];
+        var sortType = {field: "createdAt", order: "ASC"};
 
         if (req.body.typeObj) searchPar.typeObj = req.body.typeObj; else searchPar.typeObj = '%'; // тип объекта
         if (req.body.sale === 0) searchPar.sale = req.body.sale; else if (req.body.sale === 1) searchPar.sale = req.body.sale; else searchPar.sale = '%'; // продать / сдать в аренду
         if (req.body.adr) searchPar.adr = '%' + req.body.adr + '%'; else searchPar.adr = '%'; // адрес
+        if (req.body.sortType) sortType = req.body.sortType;
 
-        Object.findAll({where: {adr: {[Op.like]: searchPar.adr}, typeId: {[Op.like]: searchPar.typeObj}, sale: {[Op.like]: searchPar.sale} }})
+        Object.findAll({offset: 0, limit: 0, where: {adr: {[Op.like]: searchPar.adr}, typeId: {[Op.like]: searchPar.typeObj}, sale: {[Op.like]: searchPar.sale} },
+                    order: [
+                        [sortType.field, sortType.order]
+                    ]
+        })
             .then(function (bulletins) {
+                /*bulletins.forEach(function(bulletin) { console.log(bulletin.id) });*/
                 if (bulletins.length > 0) {
                     async.each(bulletins, function (bulletin, eachCallback) {
                         findTypeSaleByObjectId(bulletin.id, function (callback) {
@@ -38,12 +45,15 @@ module.exports = {
                             async.each(searchResult, function (bulletin, eachCallback) {
                                 bulletin.cost_userFormat = String(bulletin.cost).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
 
-                                /*dt = bulletin.createdAt;
+                                dt = bulletin.createdAt;
                                 dt_day = (dt.getDate() < 10) ? '0' + dt.getDate() : dt.getDate();
                                 dt_month = (dt.getMonth() < 9) ? '0' + (dt.getMonth() + 1) : dt.getMonth() + 1;
                                 //new_dt = dt_day + '.' + dt_month + '.' + dt.getFullYear() + ' ' + dt.toLocaleTimeString().slice(0, -3); // 01.01.2001 20:01
-                                new_dt = dt_day + '.' + dt_month + '.' + dt.getFullYear().toString().slice(-2); // 01.01.01
-                                bulletin.createdAt = new_dt;*/
+                                dt_year = dt.getFullYear().toString().slice(-2);
+                                dt_hours = (dt.getHours() < 10) ? '0' + dt.getHours() : dt.getHours();
+                                dt_minutes = (dt.getMinutes() < 10) ? '0' + dt.getMinutes() : dt.getMinutes();
+                                new_dt = dt_day + '.' + dt_month + '.' + dt_year + ' ' + dt_hours + ':' + dt_minutes; // 01.01.01 01:01
+                                bulletin.createdAt = new_dt;
 
                                 findTypeObject(bulletin.typeId, function (callback) {
                                     bulletin.typeObj = callback;
@@ -54,6 +64,14 @@ module.exports = {
                                 });
 
                             }, function (err) {
+                                for (var i = 0; i < bulletins.length; i++)
+                                    for (var j = 0; j < searchResult.length; j++)
+                                        if (bulletins[i].id === searchResult[j].id) {
+                                            searchResult.push(searchResult[j]);
+                                            break;
+                                        }
+                                searchResult = searchResult.splice(searchResult.length/2, searchResult.length/2);
+
                                 res.status(200).json(searchResult);
                             })
                         } else {
@@ -86,6 +104,13 @@ module.exports = {
                 })
         };
 
+        var findParameterId = function (displayName, callback) {
+            Parameters.findOne({where: {displayName: displayName}})
+                .then (function (par) {
+                    callback(par.id);
+                })
+        };
+
         var findTypeSaleByObjectId = function (id, callback) {
             findParameterId('Тип продажи', function (cb) {
                 ParametersObject.findOne({where: {objectId: id, parameterId: cb}})
@@ -94,13 +119,6 @@ module.exports = {
                         else callback(null);
                     })
             })
-        };
-
-        var findParameterId = function (displayName, callback) {
-            Parameters.findOne({where: {displayName: displayName}})
-                .then (function (par) {
-                    callback(par.id);
-                })
         };
 
         var findCountRooms = function (id, callback) {

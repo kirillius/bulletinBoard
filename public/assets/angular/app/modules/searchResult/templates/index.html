@@ -1,13 +1,13 @@
 <div style="background-color: lightcyan; padding: 7px 5px;">
-    <form ng-submit="search(sale, adr, searchPar.typeId, searchPar.typeSale, searchPar.countRooms)" class="row" style="margin: auto;">
+    <form ng-submit="search(sale, adr, searchPar.typeId, searchPar.typeSale, searchPar.countRooms, sort)" class="row" style="margin: auto;">
         <div class="row" style="margin: 3px 0;">
             <div class="custom-control custom-radio col-md-2">
                 <input ng-value="0" ng-model="sale" type="radio" class="custom-control-input" id="sale" name="eventBulletin">
-                <label class="custom-control-label" for="sale">Продать</label>
+                <label class="custom-control-label" for="sale">Продажа</label>
             </div>
             <div class="custom-control custom-radio col-md-5">
                 <input ng-value="1" ng-model="sale" type="radio" class="custom-control-input" id="rent" name="eventBulletin">
-                <label class="custom-control-label" for="rent">Сдать в аренду</label>
+                <label class="custom-control-label" for="rent">Аренда</label>
             </div>
         </div>
         <ui-select ng-model="searchPar.typeId" theme="bootstrap" class="col-md-3 padLeft" style="width: auto;">
@@ -46,17 +46,17 @@
 <div>
     <div id="notFound" style="margin: 20px 30px; font-size: large;"></div>
     <div class="bulletins">
-        <div class="sort" style="text-align: right; margin: 20px auto 5px;">
+        <div class="sort" style="text-align: right; margin: 20px auto 5px;" ng-show="result">
             <span>Сортировка</span>
-            <select>
-                <option>Дата (по возрастанию)</option>
-                <option>Дата (по убыванию)</option>
-                <option>Цена (по возрастанию)</option>
-                <option>Цена (по убыванию)</option>
-                <!--<option>Дата (сначала новые)</option>
-                <option>Дата (сначала старые)</option>
-                <option>Цена (сначала дешёвые)</option>
-                <option>Цена (сначала дорогие)</option>-->
+            <select ng-model="sort" ng-change="search(sale, adr, searchPar.typeId, searchPar.typeSale, searchPar.countRooms, sort)">
+                <option value="date_asc">Дата (по возрастанию)</option>
+                <option value="date_desc">Дата (по убыванию)</option>
+                <option value="cost_asc">Цена (по возрастанию)</option>
+                <option value="cost_desc">Цена (по убыванию)</option>
+                <!--<option value="date_asc">Дата (cсначала новые)</option>
+                <option value="date_desc">Дата (сначала старые)</option>
+                <option value="cost_asc">Цена (сначала дешёвые)</option>
+                <option value="cost_desc">Цена (сначала дорогие)</option>-->
             </select>
         </div>
         <div ng-repeat="bulletin in result" class="row bulletin">

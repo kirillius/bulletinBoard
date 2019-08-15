@@ -33,17 +33,20 @@
 <body>
     <div class="loginForm">
         <form action="/register" method="post">
+            <div class="input-group mb-3 flex">
+                <input type="text" class="form-control" placeholder="Логин" aria-label="Логин" aria-describedby="basic-addon2" name="username" required>
+                <span class="symbol-required">*</span>
+            </div>
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Имя" aria-label="Имя" aria-describedby="basic-addon2" name="fio">
             </div>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Логин" aria-label="Логин" aria-describedby="basic-addon2" name="username">
+            <div class="input-group mb-3 flex">
+                <input type="password" class="form-control" placeholder="Пароль" aria-label="Пароль" aria-describedby="basic-addon2" name="password" required>
+                <span class="symbol-required">*</span>
             </div>
-            <div class="input-group mb-3">
-                <input type="password" class="form-control" placeholder="Пароль" aria-label="Пароль" aria-describedby="basic-addon2" name="password">
-            </div>
-            <div class="input-group mb-3">
-                <input type="password" class="form-control" placeholder="Повторите пароль" aria-label="Пароль" aria-describedby="basic-addon2" name="repassword">
+            <div class="input-group mb-3 flex">
+                <input type="password" class="form-control" placeholder="Повторите пароль" aria-label="Пароль" aria-describedby="basic-addon2" name="repassword" required>
+                <span class="symbol-required">*</span>
             </div>
             <div class="center">
                 <button type="submit" onClick="CheckInputData()" class="btn btn-success">Зарегистрироваться</button>

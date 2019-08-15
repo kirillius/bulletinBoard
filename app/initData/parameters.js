@@ -26,6 +26,10 @@ var basicParameters = [
     {
         name: 'comfort',
         displayName: 'Комфорт'
+    },
+    {
+        name: 'paymentFrequency',
+        displayName: 'Периодичность оплаты'
     }
 ];
 

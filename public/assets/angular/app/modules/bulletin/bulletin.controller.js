@@ -29,9 +29,14 @@ angular.module('app.bulletin')
         $scope.getComfortItems();
 
         $scope.nextStep = function() {
+            var additionalVar = true;
+            if ($scope.bulletin.sale == 0) delete $scope.bulletin.paymentFrequency;
+            else additionalVar = $scope.bulletin.paymentFrequency;
             console.log($scope.bulletin);
             localStorage.setItem('userBulletin', JSON.stringify($scope.bulletin));
-            $state.go('app.bulletinStep2');
+            if ($scope.bulletin.adr && $scope.bulletin.typeId && $scope.bulletin.cost && $scope.bulletin.countRooms && additionalVar)
+                $state.go('app.bulletinStep2');
+            else notifications.warning("Попытка перехода к следующей странице с незаполненными полями");
         };
 
         $scope.saveBulletin = function() {
@@ -139,5 +144,18 @@ angular.module('app.bulletin')
                 data: {'photo': img}
             });
             cb();
-        }
+        };
+
+        $scope.symbolAppend = function(id, num) {
+            // позорная функция присоединение звёздочки к элементу с указанным id
+            if ((!document.getElementById('spanAppended_' + num) && document.getElementById(id))) { // one-time-binding не очень работает
+                var span = document.createElement('span');
+                span.classList.add('symbol-required');
+                span.id = 'spanAppended_' + num;
+                span.innerText = '*';
+                document.getElementById(id).children[0].appendChild(span);
+                span.style.marginLeft = parseInt(window.getComputedStyle(span).marginLeft) + 4 + 'px';
+            }
+            return null; // return для one-time-binding
+        };
     }]);

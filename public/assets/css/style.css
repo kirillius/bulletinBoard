@@ -49,7 +49,8 @@ body > .container {
 
 .blockInMain:hover {
     background: #2eb92e; /* Цвет фона под ссылкой */
-    color: #fff /* Цвет ссылки */
+    color: #fff; /* Цвет ссылки */
+    cursor: pointer;
 }
 /*input { width: 500px !important; } */
 
@@ -122,4 +123,16 @@ li:hover {
 .sort {
     text-align: right;
     margin: 20px auto 5px;
+}
+
+span.symbol-required {
+    font-size: 27px;
+    line-height: 0px;
+    margin-left: 1px;
+    color: red;
+}
+
+div.inline {
+    display: inline-block;
+    margin-left: 7px;
 }
