@@ -41,7 +41,7 @@
     "passport-local": "^1.0.0",
     "pug": "^2.0.3",
     "request": "^2.88.0",
-    "sequelize": "^4.41.0",
+    "sequelize": "^5.15.1",
     "tedious": "^3.0.1",
     "ui-select": "^0.19.8",
     "vinyl-source-stream": "^2.0.0"
