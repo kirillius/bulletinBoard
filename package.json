@@ -39,7 +39,7 @@
     "ng-image-gallery": "^2.1.4",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "pug": "^2.0.3",
+    "pug": "^3.0.1",
     "request": "^2.88.0",
     "sequelize": "^4.41.0",
     "tedious": "^3.0.1",
